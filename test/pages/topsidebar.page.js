@@ -1,5 +1,6 @@
 'use strict';
-let commonActions = require('../utils/CommonActions.js');
+let commonActions = require('../utils/CommonActions');
+let sectionPage = require('./section.page');
 
 /**
  * Page Object of TopSide Bar.
@@ -11,11 +12,6 @@ class TopSideBar {
      */
     constructor() {
         this.plusButton = '#AllTab_Tab';
-        this.section = {
-            account: 'a.accountBlock',
-            contacts: 'a.contactBlock',
-            opportunity: 'a.opportunityBlock',
-        }
     }
 
     /**
@@ -24,6 +20,22 @@ class TopSideBar {
     clickOnPlusButton() {
         commonActions.clickWebElement(this.plusButton);
 
+    }
+
+    /**
+     * Method to go to section using Section PageObject.
+     */
+    clickOnSection(section) {
+        sectionPage.clickOnSectionButton(section);
+
+    }
+
+    /**
+     * Method to go to Section.
+     */
+    goToSection(section) {
+        this.clickOnPlusButton();
+        this.clickOnSection(section);
     }
 }
 
