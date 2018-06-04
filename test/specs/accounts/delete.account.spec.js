@@ -6,6 +6,7 @@ let content = require('../../pages/accounts/acountContent.page');
 let form = require('../../pages/accounts/accountForm.page');
 let expect = require('chai').expect;
 describe('Acceptance Test to create new Account', function () {
+    this.retries(3);
 
     let accountToDelete = 'Account to Delete';
 
@@ -25,6 +26,7 @@ describe('Acceptance Test to create new Account', function () {
         content.selectElementAndDeleteThis(accountToDelete);
         topSideBar.goToSection('accounts');
         expect(content.isNameOnList(accountToDelete), 'Account is present on list').to.have.equal(false); //false
+
     });
 
 });

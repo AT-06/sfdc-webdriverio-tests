@@ -1,5 +1,7 @@
 'use strict';
+let config = require('../../config.json');
 let commonActions = require('../utils/CommonActions.js');
+let isClassic = config.theme.toString().toLowerCase() === 'classic';
 
 /**
  * Page Object of dynamic Sections.
@@ -11,9 +13,9 @@ class Section {
      */
     constructor() {
         this.section = {
-            account: 'a.accountBlock',
-            contacts: 'a.contactBlock',
-            opportunity: 'a.opportunityBlock',
+            account: 'a.accountBlock', // 'a[title="Accounts"]>span>span'
+            contacts: 'a.contactBlock',// 'a[title="Contacts"]>span>span'
+            opportunity: 'a.opportunityBlock'//'a[title="Opportunities"]>span>span'
         };
         this.lightningMessage = {
             message: '#lexNoThanks',
@@ -26,12 +28,14 @@ class Section {
      * @param section to go.
      */
     lookingForSection(section) {
+        commonActions.waitElementToReady(section);
         commonActions.clickWebElement(section);
         commonActions.closePopMessage(this.lightningMessage.message, this.lightningMessage.closeButton);
     }
 
     /**
-     * Method to click on login button.
+     * Method to click on lo
+     * gin button.
      * @param section to go.
      */
     clickOnSectionButton(section) {

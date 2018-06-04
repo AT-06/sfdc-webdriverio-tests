@@ -10,6 +10,12 @@ class LoginPage {
      * Constructor initializing all WebElements.
      */
     constructor() {
+        browser.timeouts({
+            "script": 15000,
+            "pageLoad": 15000,
+            "implicit": 15000
+        });
+
         this.loginUserName = '#username';
         this.loginPassword = '#password';
         this.loginSubmit = '#Login';

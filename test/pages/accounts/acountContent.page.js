@@ -1,7 +1,4 @@
 'use strict';
-
-let commonActions = require("../../utils/CommonActions");
-
 let Content = require('../content.page');
 
 /**

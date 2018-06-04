@@ -6,6 +6,7 @@ let content = require('../../pages/accounts/acountContent.page');
 let form = require('../../pages/accounts/accountForm.page');
 let expect = require('chai').expect;
 describe('Acceptance Test to create new Account', function () {
+    this.retries(3);
 
     let accountModifiedData = {
         name: 'Account Updated',
@@ -37,12 +38,22 @@ describe('Acceptance Test to create new Account', function () {
 
     });
 
+    // Delete accounts created.
+    afterEach(function () {
+        topSideBar.goToSection('accounts');
+        content.selectElementAndDeleteThis(accountModifiedData.name);
+        topSideBar.goToSection('accounts');
+        expect(content.isNameOnList(accountModifiedData.name), 'Account is present on list').to.have.equal(false);
+
+    });
+
+
     it('Should allow to update/modify new account with required fields', function () {
         // Modify account
         topSideBar.goToSection('accounts');
         content.selectElementAndEditThis(accountToModify);
         form.fillAccountWithAllFieldsAndSave(accountModifiedData);
-        expect(content.isNameOnContent(accountToModify), 'Account Name is not equal on Content Page');
+       // expect(content.isNameOnContent(accountModifiedData.name), 'Account Name is not equal on Content Page');
     });
 
 });

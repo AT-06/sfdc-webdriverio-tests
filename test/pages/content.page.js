@@ -1,5 +1,7 @@
 'use strict';
+let config = require('../../config');
 let commonActions = require('../utils/CommonActions.js');
+let isClassic = config.theme.toString().toLowerCase() === 'classic';
 
 /**
  * Page Object of Content.
@@ -10,11 +12,13 @@ class Content {
      * Constructor initializing all WebElements.
      */
     constructor() {
-        this.newButton = 'input[title="New"]';
-        this.editButton = 'input[title="Edit"]';
-        this.deleteButton = 'input[title="Delete"]';
-        this.nameOnContent = '.topName';
-        this.listOnContent = '//tr[@class="headerRow"]/parent::tbody';
+        this.newButton = 'input[title="New"]';//'//a[@title="New"]/child::div';
+        this.editButton = 'input[title="Edit"]';// '//a[@title="Edit"]/child::div';
+        this.deleteButton = 'input[title="Delete"]'; //'div.branding-actions.actionMenu.popupTargetContainer.uiPopupTarget.uiMenuList.forceActionsDropDownMenuList.uiMenuList--left.uiMenuList--default.visible.positioned > div > ul > li:nth-child(6) > a';
+        this.nameOnContent = '.topName'; //'.testonly-outputNameWithHierarchyIcon .uiOutputText';
+        this.lastElementOnList = '//a[text()="{}"]';// no need
+        this.dropDownMenu = '//div[@title="New Note"]/parent::a/parent::li/following-sibling::li';
+        this.deleteConfirmButton = '//span[text()="Delete"]';
     }
 
     /**
@@ -40,9 +44,11 @@ class Content {
 
     /**
      * Method to click element on list.
+     * @param element css locator.
+     * @param keyLocatorOnList key on list.
      */
-    clickElementOnList(element) {
-        commonActions.clickElementOnList(this.listOnContent, element);
+    clickLastElementOnList(element, keyLocatorOnList) {
+        commonActions.clickLastElementOnList(element, keyLocatorOnList);
     }
 
     /**
@@ -50,7 +56,7 @@ class Content {
      * @param element to modify
      */
     selectElementAndEditThis(element) {
-        this.clickElementOnList(element);
+        this.clickLastElementOnList(element, this.lastElementOnList);
         this.clickOnEditButton();
     }
 
@@ -59,9 +65,17 @@ class Content {
      * @param element to delete
      */
     selectElementAndDeleteThis(element) {
-        this.clickElementOnList(element);
-        this.clickOnDeleteButton();
-        commonActions.confirmAlert();
+
+        this.clickLastElementOnList(element, this.lastElementOnList);
+        if (isClassic) {
+            this.clickOnDeleteButton();
+            commonActions.confirmAlert();
+        }
+        else {
+            commonActions.clickWebElement(this.dropDownMenu);
+            this.clickOnDeleteButton();
+            commonActions.clickWebElement(this.deleteConfirmButton);
+        }
     }
 
     /**
@@ -75,7 +89,7 @@ class Content {
     }
 
     isNameOnList(nameToVerify) {
-        return commonActions.isElementOnList(this.listOnContent, nameToVerify);
+        return commonActions.isElementOnList(nameToVerify, this.lastElementOnList);
     }
 }
 

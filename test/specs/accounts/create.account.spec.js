@@ -6,9 +6,10 @@ let content = require('../../pages/accounts/acountContent.page');
 let form = require('../../pages/accounts/accountForm.page');
 let expect = require('chai').expect;
 describe('Acceptance Test to create new Account', function () {
+    this.retries(3);
 
     let accountFullData = {
-        name: 'Account with all fields filled',
+        name: 'Account Sample',
         number: 100,
         site: 2,
         parent: 'Edge Communications',
@@ -25,18 +26,26 @@ describe('Acceptance Test to create new Account', function () {
         sicCode: 200200200
     };
 
-    let accountWithRequiredFields = 'Account with only required fields filled';
-
     // Login application.
     beforeEach(function () {
         loginPage.login(config.username, config.password);
     });
 
+    // Delete accounts created.
+    afterEach(function () {
+
+        topSideBar.goToSection('accounts');
+        content.selectElementAndDeleteThis(accountFullData.name);
+        topSideBar.goToSection('accounts');
+        expect(content.isNameOnList(accountFullData.name), 'Account is present on list').to.have.equal(false);
+
+    });
+
     it('Should allow to add new account with required fields', function () {
         topSideBar.goToSection('accounts');
         content.clickOnNewButton();
-        form.fillAccountWithRequiredFieldsAndSave(accountWithRequiredFields);
-        expect(content.isNameOnContent(accountWithRequiredFields), 'Account Name is not equal on Content Page').to.have.equal(true);
+        form.fillAccountWithRequiredFieldsAndSave(accountFullData.name);
+        expect(content.isNameOnContent(accountFullData.name), 'Account Name is not equal on Content Page').to.have.equal(true);
     });
 
     it('Should allow to add new account with all information', function () {
