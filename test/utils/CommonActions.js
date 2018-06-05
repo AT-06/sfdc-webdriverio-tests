@@ -1,7 +1,8 @@
 'use strict';
 const format = require('string-format');
-
 const timeToWait = 30000;
+const config = require('../../config');
+const isClassic = config.theme.toString().toLowerCase() === 'classic';
 
 /**
  * CommonActions class with CommonActions Methods.
@@ -35,9 +36,9 @@ class CommonActions {
      * @param elementCSS WebElement locator.
      */
     static clickWebElement(elementCSS) {
-        this.waitElement(elementCSS, timeToWait);
         this.moveToComponent(elementCSS);
-        browser.element(elementCSS).click();
+        browser.click(elementCSS);
+
     }
 
     /**
@@ -45,7 +46,6 @@ class CommonActions {
      * @param elementCSS WebElement locator.
      */
     static waitElementToReady(elementCSS) {
-        browser.pause(3000);
         browser.waitForEnabled(elementCSS);
     }
 
@@ -55,7 +55,7 @@ class CommonActions {
      * @returns WebElement.
      */
     static getElement(elementCSS) {
-        this.waitElement(elementCSS, timeToWait);
+        this.waitElement(elementCSS);
         return browser.element(elementCSS);
     }
 
@@ -64,7 +64,7 @@ class CommonActions {
      * @param elementCSS WebElement locator.
      */
     static setInputTextField(elementCSS, value) {
-        this.waitElement(elementCSS, timeToWait);
+        this.waitElement(elementCSS);
         this.moveToComponent(elementCSS);
         browser.element(elementCSS).setValue(value);
     }
@@ -74,7 +74,7 @@ class CommonActions {
      * @param elementCss WebElement locator.
      */
     static moveToComponent(elementCss) {
-        this.waitElement(elementCss, timeToWait);
+        this.waitElement(elementCss);
         browser.moveToObject(elementCss);
     }
 
@@ -84,7 +84,7 @@ class CommonActions {
      */
     static selectOnComboBox(elementCss, elementToSelect, elementOnComboBox) {
         this.clickWebElement(elementCss);
-        let css = format(elementOnComboBox, elementToSelect);
+        let css = format(elementOnComboBox, elementToSelect, elementToSelect);
         this.clickWebElement(css);
     }
 
@@ -136,11 +136,18 @@ class CommonActions {
     /**
      * @param elementCss auto completer textField.
      * @param textToSelect select text on autoCompleter.
+     * @param autoCompleterButtonOnClassic locator to auto completer button on classic theme.
      */
-    static selectOnAutoCompleterTextField(elementCss, textToSelect) {
+    static selectOnAutoCompleterTextField(elementCss, textToSelect, autoCompleterButtonOnClassic) {
         this.setInputTextField(elementCss, textToSelect);
-        this.clickWebElement('//input[contains(@id,"acc3")]/following-sibling::a');
-        this.autoCompleterClassicTheme(textToSelect);
+        if (isClassic) {
+            this.clickWebElement(autoCompleterButtonOnClassic);
+            this.autoCompleterClassicTheme(textToSelect);
+        }
+        else {
+            this.autoCompleterLightTheme(textToSelect);
+        }
+
     }
 
 

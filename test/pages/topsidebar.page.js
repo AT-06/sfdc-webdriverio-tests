@@ -1,8 +1,8 @@
 'use strict';
-let config = require('../../config.json');
+const config = require('../../config');
+const isClassic = config.theme.toString().toLowerCase() === 'classic';
 let commonActions = require('../utils/CommonActions');
 let sectionPage = require('./section.page');
-let isClassic = config.theme.toString().toLowerCase() === 'classic';
 
 /**
  * Page Object of TopSide Bar.
@@ -13,7 +13,7 @@ class TopSideBar {
      * Constructor initializing all WebElements.
      */
     constructor() {
-        this.plusButton = '//li[@id="AllTab_Tab"]/a';//'//div[@class="slds-icon-waffle"]';
+        this.plusButton = '//li[@id="AllTab_Tab"]/a | //div[@class="slds-icon-waffle"]';
         this.logo = {
             classic: 'img[title="Salesforce.com"]',
             light: 'div[class="slds-global-header__logo"]'
@@ -27,12 +27,14 @@ class TopSideBar {
 
     /**
      * Method to click on login button.
+
      */
     clickOnPlusButton() {
-        if (!isClassic) {
-            commonActions.waitElementToReady(this.plusButton);
-        }
         commonActions.clickWebElement(this.plusButton);
+        if (!isClassic) {
+            commonActions.waitElement('//div[@class="slds-section__title"]/following-sibling::div');
+        }
+
 
     }
 
@@ -75,8 +77,9 @@ class TopSideBar {
     /**
      * Method to close spam on Lightning theme.
      */
-    closeSpamOnLightningTheme() {
+    waitToPageLoad() {
         if (!isClassic) {
+            browser.pause(3000);
             commonActions.waitToLightningBear();
         }
     }
@@ -98,7 +101,7 @@ class TopSideBar {
      */
     goToSection(section) {
         this.validateTheme();
-        this.closeSpamOnLightningTheme();
+        this.waitToPageLoad();
         this.clickOnPlusButton();
         this.clickOnSection(section);
     }
