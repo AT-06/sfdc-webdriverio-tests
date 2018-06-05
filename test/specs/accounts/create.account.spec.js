@@ -31,13 +31,11 @@ describe('Acceptance Test to create new Account', function () {
         loginPage.login(config.username, config.password);
     });
 
-    // Delete accounts created.
+    // Delete an accounts created.
     afterEach(function () {
-
         topSideBar.goToSection('accounts');
         content.selectElementAndDeleteThis(accountFullData.name);
-        topSideBar.goToSection('accounts');
-        expect(content.isNameOnList(accountFullData.name), 'Account is present on list').to.have.equal(false);
+        //  expect(content.isNameOnList(accountFullData.name), 'Account is present on list').to.be.false;
 
     });
 
@@ -45,14 +43,18 @@ describe('Acceptance Test to create new Account', function () {
         topSideBar.goToSection('accounts');
         content.clickOnNewButton();
         form.fillAccountWithRequiredFieldsAndSave(accountFullData.name);
-        expect(content.isNameOnContent(accountFullData.name), 'Account Name is not equal on Content Page').to.have.equal(true);
+        expect(content.isNameOnContent(accountFullData.name), 'Account Name is not equal on Content Page').to.be.true;
+        topSideBar.goToSection('accounts');
+        expect(content.isNameOnList(accountFullData.name), 'Account is present on list').to.be.true;
     });
 
     it('Should allow to add new account with all information', function () {
         topSideBar.goToSection('accounts');
         content.clickOnNewButton();
         form.fillAccountWithAllFieldsAndSave(accountFullData);
-        expect(content.isNameOnContent(accountFullData.name), 'Account Name is not equal on Content Page').to.have.equal(true);
+        expect(content.isNameOnContent(accountFullData.name), 'Account Name is not equal on Content Page').to.be.true;
+        topSideBar.goToSection('accounts');
+        expect(content.isNameOnList(accountFullData.name), 'Account is present on list').to.be.true;
     });
 
 });

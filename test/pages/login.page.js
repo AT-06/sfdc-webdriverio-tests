@@ -10,10 +10,12 @@ class LoginPage {
      * Constructor initializing all WebElements.
      */
     constructor() {
-        browser.timeouts({
-            "script": 15000,
-            "pageLoad": 15000,
-            "implicit": 15000
+        browser.addCommand(`waitAndClick`, function () {
+            return browser
+                .waitForVisible(arguments[0])
+                .then(() => {
+                    return browser.click.apply(this, arguments);
+                });
         });
 
         this.loginUserName = '#username';

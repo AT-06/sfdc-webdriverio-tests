@@ -1,7 +1,7 @@
 'use strict';
-let config = require('../../config.json');
+const config = require('../../config');
+const isClassic = config.theme.toString().toLowerCase() === 'classic';
 let commonActions = require('../utils/CommonActions.js');
-let isClassic = config.theme.toString().toLowerCase() === 'classic';
 
 /**
  * Page Object of dynamic Sections.
@@ -13,9 +13,9 @@ class Section {
      */
     constructor() {
         this.section = {
-            account: 'a.accountBlock', // 'a[title="Accounts"]>span>span'
-            contacts: 'a.contactBlock',// 'a[title="Contacts"]>span>span'
-            opportunity: 'a.opportunityBlock'//'a[title="Opportunities"]>span>span'
+            account: '//img[@title="Accounts"] | //a[@title="Accounts"]/child::span/child::span',
+            contacts: '//img[@title="Contacts"] | //a[@title="Contacts"]/child::span/child::span',
+            opportunity: '//img[@title="Opportunities"] | //a[@title="Opportunities"]/child::span/child::span'
         };
         this.lightningMessage = {
             message: '#lexNoThanks',
@@ -28,9 +28,15 @@ class Section {
      * @param section to go.
      */
     lookingForSection(section) {
-        commonActions.waitElementToReady(section);
+        browser.pause(3000);
         commonActions.clickWebElement(section);
-        commonActions.closePopMessage(this.lightningMessage.message, this.lightningMessage.closeButton);
+        if(isClassic){
+             commonActions.closePopMessage(this.lightningMessage.message, this.lightningMessage.closeButton);
+        }
+        else{
+            commonActions.waitElement('//td[contains(@class,"slds-cell-edit")]/parent::tr/parent::tbody')
+        }
+
     }
 
     /**
