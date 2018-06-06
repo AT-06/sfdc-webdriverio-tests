@@ -19,8 +19,6 @@ class Content {
             classic: '//input[@title="Edit"]',
             lightning: '//ul[@class="scrollable"]/child::li/child::a[@title="Edit"]'
         };
-        //this.deleteButton = '//input[@title="Delete"] | //a[@title="Delete"]/child::div';
-
         this.deleteButton = {
             classic: '//input[@title="Delete"]',
             lightning: '//ul[@class="scrollable"]/child::li/child::a[@title="Delete"]'
@@ -72,7 +70,6 @@ class Content {
         this.clickLastElementOnList(element, this.lastElementOnList);
         if (isClassic) {
             this.clickOnEditButton();
-            commonActions.confirmAlert();
         }
         else {
             commonActions.clickWebElement(this.dropDownMenu);
@@ -89,6 +86,7 @@ class Content {
         this.clickLastElementOnList(element, this.lastElementOnList);
         if (isClassic) {
             this.clickOnDeleteButton();
+            commonActions.confirmAlert();
         }
         else {
             commonActions.clickWebElement(this.dropDownMenu);
