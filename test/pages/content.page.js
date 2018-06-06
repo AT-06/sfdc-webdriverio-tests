@@ -72,7 +72,6 @@ class Content {
         this.clickLastElementOnList(element, this.lastElementOnList);
         if (isClassic) {
             this.clickOnEditButton();
-            commonActions.confirmAlert();
         }
         else {
             commonActions.clickWebElement(this.dropDownMenu);
@@ -89,6 +88,7 @@ class Content {
         this.clickLastElementOnList(element, this.lastElementOnList);
         if (isClassic) {
             this.clickOnDeleteButton();
+            commonActions.confirmAlert();
         }
         else {
             commonActions.clickWebElement(this.dropDownMenu);
