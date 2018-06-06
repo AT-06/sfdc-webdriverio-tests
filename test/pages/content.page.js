@@ -89,7 +89,6 @@ class Content {
         this.clickLastElementOnList(element, this.lastElementOnList);
         if (isClassic) {
             this.clickOnDeleteButton();
-            commonActions.confirmAlert();
         }
         else {
             commonActions.clickWebElement(this.dropDownMenu);
@@ -106,8 +105,6 @@ class Content {
      * @return boolean is present on element
      */
     isNameOnContent(nameToVerify) {
-        console.log(this.nameOnContent)
-        console.log(commonActions.isPresentOnElement(this.nameOnContent, nameToVerify))
         return commonActions.isPresentOnElement(this.nameOnContent, nameToVerify);
     }
 
