@@ -35,8 +35,7 @@ describe('Acceptance Test to create new Account', function () {
     afterEach(function () {
         topSideBar.goToSection('accounts');
         content.selectElementAndDeleteThis(accountFullData.name);
-        //  expect(content.isNameOnList(accountFullData.name), 'Account is present on list').to.be.false;
-
+     //   expect(content.isNameOnList(accountFullData.name), 'Account is present on list').to.be.false;
     });
 
     it('Should allow to add new account with required fields', function () {
@@ -44,8 +43,6 @@ describe('Acceptance Test to create new Account', function () {
         content.clickOnNewButton();
         form.fillAccountWithRequiredFieldsAndSave(accountFullData.name);
         expect(content.isNameOnContent(accountFullData.name), 'Account Name is not equal on Content Page').to.be.true;
-        topSideBar.goToSection('accounts');
-        expect(content.isNameOnList(accountFullData.name), 'Account is present on list').to.be.true;
     });
 
     it('Should allow to add new account with all information', function () {
@@ -53,8 +50,7 @@ describe('Acceptance Test to create new Account', function () {
         content.clickOnNewButton();
         form.fillAccountWithAllFieldsAndSave(accountFullData);
         expect(content.isNameOnContent(accountFullData.name), 'Account Name is not equal on Content Page').to.be.true;
-        topSideBar.goToSection('accounts');
-        expect(content.isNameOnList(accountFullData.name), 'Account is present on list').to.be.true;
+
     });
 
 });

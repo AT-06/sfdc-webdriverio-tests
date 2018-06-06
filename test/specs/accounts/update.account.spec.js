@@ -52,8 +52,6 @@ describe('Acceptance Test to Modify an Account', function () {
         content.selectElementAndEditThis(accountToModify);
         form.fillAccountWithAllFieldsAndSave(accountModifiedData);
         expect(content.isNameOnContent(accountModifiedData.name), 'Account Name is not equal on Content Page').to.be.true;
-        topSideBar.goToSection('accounts');
-        expect(content.isNameOnList(accountModifiedData.name), 'Account is present on list').to.be.true;
     });
 
 });
