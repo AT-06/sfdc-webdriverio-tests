@@ -12,9 +12,19 @@ class Content {
      * Constructor initializing all WebElements.
      */
     constructor() {
-        this.newButton = '//input[@title="New"] | //a[@title="New"]/child::div';
-        this.editButton = '//input[@title="Edit"] | //a[@title="Edit"]/child::div';
-        this.deleteButton = '//input[@title="Delete"] | //a[@title="Delete"]/child::div';
+        this.newButton = {
+            classic: '//input[@title="New"]',
+            lightning: '//a[@title="New"]/child::div'};
+        this.editButton = {
+            classic: '//input[@title="Edit"]',
+            lightning: '//ul[@class="scrollable"]/child::li/child::a[@title="Edit"]'
+        };
+        //this.deleteButton = '//input[@title="Delete"] | //a[@title="Delete"]/child::div';
+
+        this.deleteButton = {
+            classic: '//input[@title="Delete"]',
+            lightning: '//ul[@class="scrollable"]/child::li/child::a[@title="Delete"]'
+        };
         this.nameOnContent = '.topName , .testonly-outputNameWithHierarchyIcon .uiOutputText';
         this.lastElementOnList = '//a[text()="{}"]';
         this.dropDownMenu = '//div[@title="New Note"]/parent::a/parent::li/following-sibling::li';
@@ -25,21 +35,24 @@ class Content {
      * Method to click on New button.
      */
     clickOnNewButton() {
-        commonActions.clickWebElement(this.newButton);
+        let selector = commonActions.getSelector(this.newButton);
+        commonActions.clickWebElement(selector);
     }
 
     /**
      * Method to click on Edit button.
      */
     clickOnEditButton() {
-        commonActions.clickWebElement(this.editButton);
+        let selector = commonActions.getSelector(this.editButton);
+        commonActions.clickWebElement(selector);
     }
 
     /**
      * Method to click on Delete button.
      */
     clickOnDeleteButton() {
-        commonActions.clickWebElement(this.deleteButton);
+        let selector = commonActions.getSelector(this.deleteButton);
+        commonActions.clickWebElement(selector);
     }
 
     /**
@@ -57,7 +70,15 @@ class Content {
      */
     selectElementAndEditThis(element) {
         this.clickLastElementOnList(element, this.lastElementOnList);
-        this.clickOnEditButton();
+        if (isClassic) {
+            this.clickOnEditButton();
+            commonActions.confirmAlert();
+        }
+        else {
+            commonActions.clickWebElement(this.dropDownMenu);
+            this.clickOnEditButton();
+        }
+        commonActions.pauseInSeconds(2);
     }
 
     /**
@@ -75,6 +96,7 @@ class Content {
             this.clickOnDeleteButton();
             commonActions.clickWebElement(this.deleteConfirmButton);
         }
+        commonActions.pauseInSeconds(2);
     }
 
     /**
@@ -84,6 +106,8 @@ class Content {
      * @return boolean is present on element
      */
     isNameOnContent(nameToVerify) {
+        console.log(this.nameOnContent)
+        console.log(commonActions.isPresentOnElement(this.nameOnContent, nameToVerify))
         return commonActions.isPresentOnElement(this.nameOnContent, nameToVerify);
     }
 

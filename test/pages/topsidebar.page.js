@@ -13,7 +13,7 @@ class TopSideBar {
      * Constructor initializing all WebElements.
      */
     constructor() {
-        this.plusButton = '//li[@id="AllTab_Tab"]/a | //div[@class="slds-icon-waffle"]';
+        this.plusButton = '//li[@id="AllTab_Tab"]/a | //div[@class="slds-icon-waffle"]/child::div';
         this.logo = {
             classic: 'img[title="Salesforce.com"]',
             light: 'div[class="slds-global-header__logo"]'
@@ -31,11 +31,9 @@ class TopSideBar {
      */
     clickOnPlusButton() {
         commonActions.clickWebElement(this.plusButton);
-        if (!isClassic) {
-            commonActions.waitElement('//div[@class="slds-section__title"]/following-sibling::div');
-        }
-
-
+        // if (!isClassic) {
+        //     commonActions.waitElement('//div[@class="slds-section__title"]/following-sibling::div');
+        // }
     }
 
     /**
@@ -43,7 +41,6 @@ class TopSideBar {
      */
     clickOnSection(section) {
         sectionPage.clickOnSectionButton(section);
-
     }
 
     /**
@@ -51,6 +48,7 @@ class TopSideBar {
      * @return Boolean true is classic theme, false is not classic theme.
      */
     getTheme() {
+       // console.log(commonActions.getSelector(this.logo));
         return commonActions.isCurrentThemeClassic(this.logo);
     }
 

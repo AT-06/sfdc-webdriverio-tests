@@ -15,7 +15,8 @@ class CommonActions {
      */
     static waitElement(elementCSS) {
         browser.waitUntil(function () {
-            return browser.isVisible(elementCSS) && browser.isExisting(elementCSS);
+            return browser.isVisible(elementCSS)
+                && browser.isExisting(elementCSS);
         }, timeToWait);
     }
 
@@ -26,8 +27,18 @@ class CommonActions {
      */
     static waitElements(elementCSS1, elementCSS2) {
         browser.waitUntil(function () {
-            return browser.isVisible(elementCSS1)
-                || browser.isVisible(elementCSS2);
+            return browser.isExisting(elementCSS1)
+                || browser.isExisting(elementCSS2);
+        }, timeToWait);
+    }
+
+    /**
+     * Method to persist click on element.
+     * @param elementCSS WebElement locator.
+     */
+    static clickAndExpectElement(elementCSS) {
+        browser.waitUntil(function () {
+            return browser.click(elementCSS);
         }, timeToWait);
     }
 
@@ -103,6 +114,7 @@ class CommonActions {
      */
     static clickLastElementOnList(elementName, keyLocatorOnList) {
         let elementToClick = format(keyLocatorOnList, elementName);
+        browser.pause(2000);
         this.clickWebElement(elementToClick);
     }
 
@@ -136,16 +148,16 @@ class CommonActions {
     /**
      * @param elementCss auto completer textField.
      * @param textToSelect select text on autoCompleter.
-     * @param autoCompleterButtonOnClassic locator to auto completer button on classic theme.
+     * @param autoCompleterKey locator to auto completer button on classic theme.
      */
-    static selectOnAutoCompleterTextField(elementCss, textToSelect, autoCompleterButtonOnClassic) {
+    static selectOnAutoCompleterTextField(elementCss, textToSelect, autoCompleterKey) {
         this.setInputTextField(elementCss, textToSelect);
         if (isClassic) {
-            this.clickWebElement(autoCompleterButtonOnClassic);
+            this.clickWebElement(autoCompleterKey);
             this.autoCompleterClassicTheme(textToSelect);
         }
         else {
-            this.autoCompleterLightTheme(textToSelect);
+            this.autoCompleterLightTheme(textToSelect, autoCompleterKey);
         }
 
     }
@@ -170,8 +182,8 @@ class CommonActions {
      * @param textToSelect select text on autoCompleter.
      * NEED IMPROVE
      */
-    static autoCompleterLightTheme(textToSelect) {
-        let selector = format("//div[@title='%s']/parent::div/preceding-sibling::div", textToSelect);
+    static autoCompleterLightTheme(textToSelect, autoCompleterKey) {
+        let selector = format(autoCompleterKey, textToSelect);
         this.clickWebElement(selector);
     }
 
@@ -191,6 +203,16 @@ class CommonActions {
         this.waitElements(logo.classic, logo.light);
         return browser.isVisible(logo.classic);
     }
+
+    static getSelector(selector) {
+        this.waitElements(selector.classic, selector.lightning);
+        return browser.isVisible(selector.classic) ? selector.classic : selector.lightning;
+    }
+
+    static pauseInSeconds(time) {
+        browser.pause(time * 1000);
+    }
+
 }
 
 module.exports = CommonActions;

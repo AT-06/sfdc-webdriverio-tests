@@ -1,5 +1,6 @@
 'use strict';
-
+const config = require('../../../config');
+const isClassic = config.theme.toString().toLowerCase() === 'classic';
 let commonActions = require("../../utils/CommonActions");
 let Form = require('../form.page');
 
@@ -16,9 +17,10 @@ class AccountForm extends Form {
         // Selector of Account Information.
         this.elementOnComboBox = '//a[@title="{}"] | //option[@value="{}"]';
         this.autoCompleterButtonOnClassic = '//input[contains(@id,"acc3")]/following-sibling::a';
+        this.autoCompleterOnLightning = '//div[@title="{}"]/parent::div/preceding-sibling::div';
         this.accountInformation = {
             name: '//span[text()="Account Name"]/parent::label/following-sibling::input | //input[@id="acc2"]',
-            parent: '//span[text()="Parent Account"]/parent::label/following-sibling::div | //input[@id="acc3"]',
+            parent: '//span[text()="Parent Account"]/parent::label/following-sibling::div/descendant::input | //input[@id="acc3"]',
             number: '//span[text()="Account Number"]/parent::label/following-sibling::input | //input[@id="acc5"]',
             site: '//span[text()="Account Site"]/parent::label/following-sibling::input | //input[@id="acc23"]',
             type: '//span[text()="Type"]/parent::span/following-sibling::div/descendant::a | //select[@id="acc6"]',
@@ -40,7 +42,12 @@ class AccountForm extends Form {
      */
     fillAccountWithAllFieldsAndSave(accountData) {
         commonActions.setInputTextField(this.accountInformation.name, accountData.name);
-        commonActions.selectOnAutoCompleterTextField(this.accountInformation.parent, accountData.parent,this.autoCompleterButtonOnClassic);
+        if(isClassic){
+            commonActions.selectOnAutoCompleterTextField(this.accountInformation.parent, accountData.parent, this.autoCompleterButtonOnClassic);
+        }
+        else{
+            commonActions.selectOnAutoCompleterTextField(this.accountInformation.parent, accountData.parent, this.autoCompleterOnLightning);
+        }
         commonActions.setInputTextField(this.accountInformation.number, accountData.number);
         commonActions.setInputTextField(this.accountInformation.site, accountData.site);
         commonActions.selectOnComboBox(this.accountInformation.type, accountData.type, this.elementOnComboBox);
@@ -57,6 +64,13 @@ class AccountForm extends Form {
 
         // click on save button
         this.clickOnSaveButton();
+        if(isClassic){
+            // add 2nd assert on
+        }
+        else{
+            commonActions.pauseInSeconds(2); // improve until wait to green message
+        }
+
     }
 
     /**
@@ -65,6 +79,7 @@ class AccountForm extends Form {
     fillAccountWithRequiredFieldsAndSave(accountName) {
         commonActions.setInputTextField(this.accountInformation.name, accountName);
         this.clickOnSaveButton();
+        commonActions.pauseInSeconds(2); // improve until wait to green message
     }
 
 }

@@ -13,9 +13,12 @@ class Section {
      */
     constructor() {
         this.section = {
-            account: '//img[@title="Accounts"] | //a[@title="Accounts"]/child::span/child::span',
-            contacts: '//img[@title="Contacts"] | //a[@title="Contacts"]/child::span/child::span',
-            opportunity: '//img[@title="Opportunities"] | //a[@title="Opportunities"]/child::span/child::span'
+            account: {
+                classic: '//img[@title="Accounts"]/parent::a',
+                lightning: '//a[@title="Accounts"]/child::span/child::span'
+            },
+            contacts: '//img[@title="Contacts"]/parent::a | //a[@title="Contacts"]/child::span/child::span',
+            opportunity: '//img[@title="Opportunities"]/parent::a | //a[@title="Opportunities"]/child::span/child::span'
         };
         this.lightningMessage = {
             message: '#lexNoThanks',
@@ -28,12 +31,13 @@ class Section {
      * @param section to go.
      */
     lookingForSection(section) {
-        browser.pause(3000);
-        commonActions.clickWebElement(section);
-        if(isClassic){
-             commonActions.closePopMessage(this.lightningMessage.message, this.lightningMessage.closeButton);
+        commonActions.pauseInSeconds(3);
+        let finalSelector = commonActions.getSelector(section);
+        commonActions.clickWebElement(finalSelector);
+        if (isClassic) {
+            commonActions.closePopMessage(this.lightningMessage.message, this.lightningMessage.closeButton);
         }
-        else{
+        else {
             commonActions.waitElement('//td[contains(@class,"slds-cell-edit")]/parent::tr/parent::tbody')
         }
 
