@@ -4,7 +4,6 @@ let loginPage = require('../../pages/login.page');
 let topSideBar = require('../../pages/topsidebar.page');
 let content = require('../../pages/content.page');
 let form = require(`../../pages/contacts/contactsForm.${theme}.page`);
-//let expect = require('chai').expect;
 describe('Acceptance Test to Modify a Contact', function () {
 
     let contactModifiedData = {

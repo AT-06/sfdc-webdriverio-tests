@@ -4,7 +4,7 @@ let loginPage = require('../../pages/login.page');
 let topSideBar = require('../../pages/topsidebar.page');
 let content = require('../../pages/content.page');
 let form = require(`../../pages/accounts/accountForm.${theme}.page`);
-//let expect = require('chai').expect;
+
 describe('Acceptance Test to create new Account', function () {
 
     let accountFullData = {
