@@ -17,7 +17,10 @@ class Section {
                 classic: '//img[@title="Accounts"]/parent::a',
                 lightning: '//a[@title="Accounts"]/child::span/child::span'
             },
-            contacts: '//img[@title="Contacts"]/parent::a | //a[@title="Contacts"]/child::span/child::span',
+            contacts: {
+                classic: '//img[@title="Contacts"]/parent::a',
+                lightning: '//a[@title="Contacts"]/child::span/child::span'
+            },
             opportunity: '//img[@title="Opportunities"]/parent::a | //a[@title="Opportunities"]/child::span/child::span'
         };
         this.lightningMessage = {

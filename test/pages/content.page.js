@@ -14,7 +14,8 @@ class Content {
     constructor() {
         this.newButton = {
             classic: '//input[@title="New"]',
-            lightning: '//a[@title="New"]/child::div'};
+            lightning: '//a[@title="New"]/child::div'
+        };
         this.editButton = {
             classic: '//input[@title="Edit"]',
             lightning: '//ul[@class="scrollable"]/child::li/child::a[@title="Edit"]'
@@ -117,4 +118,4 @@ class Content {
     }
 }
 
-module.exports = Content;
+module.exports = new Content();

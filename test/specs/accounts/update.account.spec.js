@@ -2,11 +2,10 @@
 let config = require('../../../config.json');
 let loginPage = require('../../pages/login.page');
 let topSideBar = require('../../pages/topsidebar.page');
-let content = require('../../pages/accounts/acountContent.page');
-let form = require('../../pages/accounts/accountForm.page');
-let expect = require('chai').expect;
+let content = require('../../pages/content.page');
+let form = require(`../../pages/accounts/accountForm.${theme}.page`);
+//let expect = require('chai').expect;
 describe('Acceptance Test to Modify an Account', function () {
-    this.retries(3);
 
     let accountModifiedData = {
         name: 'Account Updated',
@@ -34,7 +33,7 @@ describe('Acceptance Test to Modify an Account', function () {
         // Create new account to modify.
         topSideBar.goToSection('accounts');
         content.clickOnNewButton();
-        form.fillAccountWithRequiredFieldsAndSave(accountToModify);
+        form.fillAccountWithRequiredField(accountToModify);
 
     });
 
@@ -50,7 +49,7 @@ describe('Acceptance Test to Modify an Account', function () {
         // Modify account
         topSideBar.goToSection('accounts');
         content.selectElementAndEditThis(accountToModify);
-        form.fillAccountWithAllFieldsAndSave(accountModifiedData);
+        form.fillAccountFields(accountModifiedData);
         expect(content.isNameOnContent(accountModifiedData.name), 'Account Name is not equal on Content Page').to.be.true;
     });
 

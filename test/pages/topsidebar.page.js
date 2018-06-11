@@ -48,7 +48,7 @@ class TopSideBar {
      * @return Boolean true is classic theme, false is not classic theme.
      */
     getTheme() {
-       // console.log(commonActions.getSelector(this.logo));
+        // console.log(commonActions.getSelector(this.logo));
         return commonActions.isCurrentThemeClassic(this.logo);
     }
 
@@ -99,7 +99,7 @@ class TopSideBar {
      */
     goToSection(section) {
         this.validateTheme();
-        this.waitToPageLoad();
+        //  this.waitToPageLoad();
         this.clickOnPlusButton();
         this.clickOnSection(section);
     }

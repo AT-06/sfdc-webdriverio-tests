@@ -2,11 +2,10 @@
 let config = require('../../../config.json');
 let loginPage = require('../../pages/login.page');
 let topSideBar = require('../../pages/topsidebar.page');
-let content = require('../../pages/accounts/acountContent.page');
-let form = require('../../pages/accounts/accountForm.page');
-let expect = require('chai').expect;
+let content = require('../../pages/content.page');
+let form = require(`../../pages/accounts/accountForm.${theme}.page`);
+//let expect = require('chai').expect;
 describe('Acceptance Test to create new Account', function () {
-    this.retries(3);
 
     let accountFullData = {
         name: 'Account Sample',
@@ -41,14 +40,14 @@ describe('Acceptance Test to create new Account', function () {
     it('Should allow to add new account with required fields', function () {
         topSideBar.goToSection('accounts');
         content.clickOnNewButton();
-        form.fillAccountWithRequiredFieldsAndSave(accountFullData.name);
+        form.fillAccountWithRequiredField(accountFullData.name);
         expect(content.isNameOnContent(accountFullData.name), 'Account Name is not equal on Content Page').to.be.true;
     });
 
     it('Should allow to add new account with all information', function () {
         topSideBar.goToSection('accounts');
         content.clickOnNewButton();
-        form.fillAccountWithAllFieldsAndSave(accountFullData);
+        form.fillAccountFields(accountFullData);
         expect(content.isNameOnContent(accountFullData.name), 'Account Name is not equal on Content Page').to.be.true;
 
     });
