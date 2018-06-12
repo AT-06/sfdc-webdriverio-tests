@@ -17,7 +17,10 @@ class Section {
                 classic: '//img[@title="Accounts"]/parent::a',
                 lightning: '//a[@title="Accounts"]/child::span/child::span'
             },
-            contacts: '//img[@title="Contacts"]/parent::a | //a[@title="Contacts"]/child::span/child::span',
+            contacts: {
+                classic: '//img[@title="Contacts"]/parent::a',
+                lightning: '//a[@title="Contacts"]/child::span/child::span'
+            },
             opportunity: '//img[@title="Opportunities"]/parent::a | //a[@title="Opportunities"]/child::span/child::span'
         };
         this.lightningMessage = {
@@ -34,13 +37,6 @@ class Section {
         commonActions.pauseInSeconds(3);
         let finalSelector = commonActions.getSelector(section);
         commonActions.clickWebElement(finalSelector);
-        if (isClassic) {
-            commonActions.closePopMessage(this.lightningMessage.message, this.lightningMessage.closeButton);
-        }
-        else {
-            commonActions.waitElement('//td[contains(@class,"slds-cell-edit")]/parent::tr/parent::tbody')
-        }
-
     }
 
     /**

@@ -2,7 +2,6 @@
 const format = require('string-format');
 const timeToWait = 30000;
 const config = require('../../config');
-const isClassic = config.theme.toString().toLowerCase() === 'classic';
 
 /**
  * CommonActions class with CommonActions Methods.
@@ -50,14 +49,6 @@ class CommonActions {
         this.moveToComponent(elementCSS);
         browser.click(elementCSS);
 
-    }
-
-    /**
-     * Method to wait element has been enable.
-     * @param elementCSS WebElement locator.
-     */
-    static waitElementToReady(elementCSS) {
-        browser.waitForEnabled(elementCSS);
     }
 
     /**
@@ -128,63 +119,11 @@ class CommonActions {
     }
 
     /**
-     * @param message popup message.
-     * @param closeButton close button on popup message at Classic Theme.
-     */
-    static closePopMessage(message, closeButton) {
-        if (browser.isVisible(message)) {
-            this.clickWebElement(closeButton);
-        }
-    }
-
-    /**
      * @param elementCss element.
      * @param textToVerify text to verify.
      */
     static isPresentOnElement(elementCss, textToVerify) {
         return this.getElement(elementCss).getText().toString() === textToVerify;
-    }
-
-    /**
-     * @param elementCss auto completer textField.
-     * @param textToSelect select text on autoCompleter.
-     * @param autoCompleterKey locator to auto completer button on classic theme.
-     */
-    static selectOnAutoCompleterTextField(elementCss, textToSelect, autoCompleterKey) {
-        this.setInputTextField(elementCss, textToSelect);
-        if (isClassic) {
-            this.clickWebElement(autoCompleterKey);
-            this.autoCompleterClassicTheme(textToSelect);
-        }
-        else {
-            this.autoCompleterLightTheme(textToSelect, autoCompleterKey);
-        }
-
-    }
-
-
-    /**
-     * @param textToSelect select text on autoCompleter.
-     */
-    static autoCompleterClassicTheme(textToSelect) {
-
-
-        let handle = browser.getTabIds();
-        browser.switchTab(handle[1]);
-        browser.frame("resultsFrame");
-        let css = format('//a[text()="{}"]', textToSelect);
-        browser.pause(3000);
-        this.clickWebElement(css);
-        browser.switchTab(handle[0]);
-    }
-
-    /**
-     * @param textToSelect select text on autoCompleter.
-     * NEED IMPROVE
-     */
-    static autoCompleterLightTheme(textToSelect, autoCompleterKey) {
-        let selector = format(autoCompleterKey, textToSelect);
-        this.clickWebElement(selector);
     }
 
     /**

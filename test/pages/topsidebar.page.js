@@ -31,9 +31,6 @@ class TopSideBar {
      */
     clickOnPlusButton() {
         commonActions.clickWebElement(this.plusButton);
-        // if (!isClassic) {
-        //     commonActions.waitElement('//div[@class="slds-section__title"]/following-sibling::div');
-        // }
     }
 
     /**
@@ -48,7 +45,6 @@ class TopSideBar {
      * @return Boolean true is classic theme, false is not classic theme.
      */
     getTheme() {
-       // console.log(commonActions.getSelector(this.logo));
         return commonActions.isCurrentThemeClassic(this.logo);
     }
 

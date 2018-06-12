@@ -1,3 +1,10 @@
+const config = require('./config.json');
+global.theme = config.theme.toString().toLowerCase();
+global.expect = require('chai').expect;
+global.loginApplication = {
+    username: config.username,
+    password: config.password
+};
 exports.config = {
     //
     // ==================
@@ -144,8 +151,9 @@ exports.config = {
      * @param {Object} config wdio configuration object
      * @param {Array.<Object>} capabilities list of capabilities details
      */
-    // onPrepare: function (config, capabilities) {
-    // },
+    onPrepare: function () {
+        //  global.theme = require('./config.json').theme.toString().toLowerCase();
+    }
     /**
      * Gets executed just before initialising the webdriver session and specs framework. It allows you
      * to manipulate configurations depending on the capability or spec.
@@ -243,4 +251,5 @@ exports.config = {
     // onComplete: function(exitCode, config, capabilities) {
     // }
 }
+
 
