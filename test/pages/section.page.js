@@ -37,13 +37,6 @@ class Section {
         commonActions.pauseInSeconds(3);
         let finalSelector = commonActions.getSelector(section);
         commonActions.clickWebElement(finalSelector);
-        if (isClassic) {
-            commonActions.closePopMessage(this.lightningMessage.message, this.lightningMessage.closeButton);
-        }
-        else {
-            commonActions.waitElement('//td[contains(@class,"slds-cell-edit")]/parent::tr/parent::tbody')
-        }
-
     }
 
     /**

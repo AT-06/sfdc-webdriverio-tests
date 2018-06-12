@@ -1,50 +1,40 @@
 'use strict';
-let config = require('../../../config.json');
-let loginPage = require('../../pages/login.page');
+let login = require('../../pages/login.page');
 let topSideBar = require('../../pages/topsidebar.page');
 let content = require('../../pages/content.page');
 let form = require(`../../pages/contacts/contactsForm.${theme}.page`);
+
 describe('Acceptance Test to Modify a Contact', function () {
 
     let contactModifiedData = {
         lastName: 'Grillo',
         title: 'Ing',
         department: 'Sales',
-        birthdate: '5/4/2018 ',
         leadSource: 'Web',
         phone: '11111',
         mobile: '77777',
-        fax: '99999',
-        email: 'grillo@gmail.com',
-        assistant: 'assistant',
-        street: 'libertador',
-        city: 'Cochabamba',
-        country: 'Bolivia',
-        languages: 'English',
-        description: 'This is the test'
+        email: 'grillo@gmail.com'
     };
 
-    let contactToModify = 'Contact to update';
+    let contactWithRequiredField = {
+        lastName: 'TheContact'
+    };
 
     beforeEach(function () {
-        loginPage.login(config.username, config.password);
+        login.login(loginApplication.username, loginApplication.password);
         topSideBar.goToSection('contacts');
         content.clickOnNewButton();
-        form.fillContact(contactToModify);
-
-    });
-
-    afterEach(function () {
-        topSideBar.goToSection('contacts');
-        content.selectElementAndDeleteThis(contactModifiedData.lastName);
-
+        form.fillContactFields(contactWithRequiredField);
+        expect(content.isNameOnContent(contactWithRequiredField.lastName), 'Contact Name is not equal on Content Page').to.be.true;
     });
 
     it('Should allow to update/modify new contact with required fields', function () {
         topSideBar.goToSection('contacts');
-        content.selectElementAndEditThis(contactToModify);
+        content.selectElementAndEditThis(contactWithRequiredField.lastName);
         form.fillContactFields(contactModifiedData);
-        expect(content.isNameOnContent(contactModifiedData.lastName), 'Contact Last Name is not equal on Content Page').to.be.true;
+        topSideBar.goToSection('contacts');
+        content.clickLastElementOnList(contactModifiedData.lastName);
+        expect(content.isNameOnContent(contactModifiedData.lastName), 'Contact Name is not equal on Content Page').to.be.true;
     });
 
 });

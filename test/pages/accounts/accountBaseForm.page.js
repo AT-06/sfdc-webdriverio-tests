@@ -7,37 +7,30 @@ class AccountBaseForm extends Form {
         super();
     }
 
-    /**
-     * Method to fill all account information.
-     */
-    fillAccountWithAllFieldsAndSave(elementCss, accountData, autoCompleter) {
-        commonActions.setInputTextField(elementCss.name, accountData.name);
-        commonActions.selectOnAutoCompleterTextField(elementCss.parent, accountData.parent, autoCompleter);
-
-        commonActions.setInputTextField(elementCss.number, accountData.number);
-        commonActions.setInputTextField(elementCss.site, accountData.site);
-        commonActions.selectOnComboBox(elementCss.type, accountData.type, this.elementOnComboBox);
-        commonActions.selectOnComboBox(elementCss.industry, accountData.industry, this.elementOnComboBox);
-        commonActions.setInputTextField(elementCss.annualRevenue, accountData.annualRevenue);
-        commonActions.selectOnComboBox(elementCss.rating, accountData.rating, this.elementOnComboBox);
-        commonActions.setInputTextField(elementCss.phone, accountData.phone);
-        commonActions.setInputTextField(elementCss.fax, accountData.fax);
-        commonActions.setInputTextField(elementCss.website, accountData.website);
-        commonActions.setInputTextField(elementCss.tickerSymbol, accountData.tickerSymbol);
-        commonActions.selectOnComboBox(elementCss.ownership, accountData.ownership, this.elementOnComboBox);
-        commonActions.setInputTextField(elementCss.employees, accountData.employees);
-        commonActions.setInputTextField(elementCss.sicCode, accountData.sicCode);
-
+    fillAccountWithAllFieldsAndSave(accountInformation, accountDataValue, elementOnComboBox) {
+        let fillAccountInformation = {
+            'name': () => this.setAccountInput(accountInformation.name, accountDataValue.name),
+            'number': () => this.setAccountInput(accountInformation.number, accountDataValue.number),
+            'site': () => this.setAccountInput(accountInformation.site, accountDataValue.site),
+            'type': () => this.setAccountOnComboBox(accountInformation.type, accountDataValue.type, elementOnComboBox),
+            'industry': () => this.setAccountOnComboBox(accountInformation.industry, accountDataValue.industry, elementOnComboBox),
+            'annualRevenue': () => this.setAccountInput(accountInformation.annualRevenue, accountDataValue.annualRevenue),
+            'rating': () => this.setAccountOnComboBox(accountInformation.rating, accountDataValue.rating, elementOnComboBox),
+            'phone': () => this.setAccountInput(accountInformation.phone, accountDataValue.phone),
+        }
+        Object.keys(accountDataValue).forEach(key => {
+            fillAccountInformation[key].call();
+        });
         this.clickOnSaveButton();
 
     }
 
-    /**
-     * Method to fill only name of an account.
-     */
-    fillRequiredField(elementCss, accountName) {
-        commonActions.setInputTextField(elementCss, accountName);
-        this.clickOnSaveButton();
+    setAccountInput(elementCss, accountText) {
+        commonActions.setInputTextField(elementCss, accountText);
+    }
+
+    setAccountOnComboBox(elementCss, accountText, elementOnComboBox) {
+        commonActions.selectOnComboBox(elementCss, accountText, elementOnComboBox);
     }
 }
 

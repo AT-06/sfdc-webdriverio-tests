@@ -5,7 +5,6 @@ class AccountClassicForm extends AccountBase {
     constructor() {
         super();
         this.elementOnComboBox = '//a[@title="{}"]';
-        this.autoCompleterButtonOnClassic = '//input[contains(@id,"acc3")]/following-sibling::a';
         this.accountInformation = {
             name: '//input[@id="acc2"]',
             parent: '//input[@id="acc3"]',
@@ -26,11 +25,7 @@ class AccountClassicForm extends AccountBase {
     }
 
     fillAccountFields(accountData) {
-        this.fillAccountWithAllFieldsAndSave(this.accountInformation, accountData, this.autoCompleterButtonOnClassic);
-    }
-
-    fillAccountWithRequiredField(accountName) {
-        this.fillRequiredField(this.accountInformation.name, accountName);
+        this.fillAccountWithAllFieldsAndSave(this.accountInformation, accountData, this.elementOnComboBox);
     }
 
 }

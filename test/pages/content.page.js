@@ -26,7 +26,8 @@ class Content {
         };
         this.nameOnContent = '.topName , .testonly-outputNameWithHierarchyIcon .uiOutputText';
         this.lastElementOnList = '//a[text()="{}"]';
-        this.dropDownMenu = '//div[@title="New Note"]/parent::a/parent::li/following-sibling::li';
+        this.dropDownMenu = '//a[@class="slds-grid slds-grid--vertical-align-center slds-grid--align-center ' +
+            'sldsButtonHeightFix" and not(@title="Show one more action")]';
         this.deleteConfirmButton = '//span[text()="Delete"]';
     }
 
@@ -57,10 +58,9 @@ class Content {
     /**
      * Method to click element on list.
      * @param element css locator.
-     * @param keyLocatorOnList key on list.
      */
-    clickLastElementOnList(element, keyLocatorOnList) {
-        commonActions.clickLastElementOnList(element, keyLocatorOnList);
+    clickLastElementOnList(element) {
+        commonActions.clickLastElementOnList(element, this.lastElementOnList);
     }
 
     /**
@@ -68,7 +68,7 @@ class Content {
      * @param element to modify
      */
     selectElementAndEditThis(element) {
-        this.clickLastElementOnList(element, this.lastElementOnList);
+        this.clickLastElementOnList(element);
         if (isClassic) {
             this.clickOnEditButton();
         }

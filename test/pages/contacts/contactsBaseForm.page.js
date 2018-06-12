@@ -6,29 +6,31 @@ class ContactsBaseForm extends Form {
         super();
     }
 
-    fillContactWithAllFieldsAndSave(contactInformation, contactData, elementOnComboBox) {
-        commonActions.setInputTextField(contactInformation.lastName, contactData.lastName);
-        commonActions.setInputTextField(contactInformation.title, contactData.title);
-        commonActions.setInputTextField(contactInformation.department, contactData.department);
-        commonActions.setInputTextField(contactInformation.birthdate, contactData.birthdate);
-        commonActions.selectOnComboBox(contactInformation.leadSource, contactData.leadSource, elementOnComboBox);
-        commonActions.setInputTextField(contactInformation.phone, contactData.phone);
-        commonActions.setInputTextField(contactInformation.mobile, contactData.mobile);
-        commonActions.setInputTextField(contactInformation.fax, contactData.fax);
-        commonActions.setInputTextField(contactInformation.email, contactData.email);
-        commonActions.setInputTextField(contactInformation.assistant, contactData.assistant);
-        commonActions.setInputTextField(contactInformation.street, contactData.street);
-        commonActions.setInputTextField(contactInformation.city, contactData.city);
-        commonActions.setInputTextField(contactInformation.country, contactData.country);
-        commonActions.setInputTextField(contactInformation.languages, contactData.languages);
-        commonActions.setInputTextField(contactInformation.description, contactData.description);
+    fillContactWithAllFieldsAndSave(contactInformation, contactDataValue, elementOnComboBox) {
+        let fillContactInformation = {
+            'lastName': () => this.setContactInput(contactInformation.lastName, contactDataValue.lastName),
+            'phone': () => this.setContactInput(contactInformation.phone, contactDataValue.phone),
+            'mobile': () => this.setContactInput(contactInformation.mobile, contactDataValue.mobile),
+            'title': () => this.setContactInput(contactInformation.title, contactDataValue.title),
+            'department': () => this.setContactInput(contactInformation.department, contactDataValue.department),
+            'leadSource': () => this.setContactOnComboBox(contactInformation.leadSource, contactDataValue.leadSource, elementOnComboBox),
+            'email': () => this.setContactInput(contactInformation.email, contactDataValue.email),
+        }
+        Object.keys(contactDataValue).forEach(key => {
+            fillContactInformation[key].call();
+        });
         this.clickOnSaveButton();
+
     }
 
-    fillRequiredField(contactInformation, contactData) {
-        commonActions.setInputTextField(contactInformation.lastName, contactData);
-        this.clickOnSaveButton();
+    setContactInput(elementCss, contactText) {
+        commonActions.setInputTextField(elementCss, contactText);
     }
+
+    setContactOnComboBox(elementCss, contactText, elementOnComboBox) {
+        commonActions.selectOnComboBox(elementCss, contactText, elementOnComboBox);
+    }
+
 }
 
 module.exports = ContactsBaseForm;

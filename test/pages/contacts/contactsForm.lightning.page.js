@@ -27,12 +27,9 @@ class ContactsLightForm extends AccountBaseForm {
     }
 
     fillContactFields(contactData) {
-        this.fillContactWithAllFieldsAndSave(this.contactInformation, contactData, this.elementOnComboBox);
+        this.fillAccountWithAllFieldsAndSave(this.contactInformation, contactData, this.elementOnComboBox);
     }
 
-    fillContact(contactData) {
-        this.fillRequiredField(this.contactInformation, contactData);
-    }
 }
 
 module.exports = new ContactsLightForm();

@@ -1,7 +1,10 @@
 const config = require('./config.json');
 global.theme = config.theme.toString().toLowerCase();
 global.expect = require('chai').expect;
-
+global.loginApplication = {
+    username: config.username,
+    password: config.password
+};
 exports.config = {
     //
     // ==================
@@ -248,4 +251,5 @@ exports.config = {
     // onComplete: function(exitCode, config, capabilities) {
     // }
 }
+
 

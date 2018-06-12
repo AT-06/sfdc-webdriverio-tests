@@ -29,9 +29,6 @@ class ContactsClassicForm extends ContactsBaseForm {
         this.fillContactWithAllFieldsAndSave(this.contactInformation, contactData, this.elementOnComboBox);
     }
 
-    fillContact(contactData) {
-        this.fillRequiredField(this.contactInformation, contactData);
-    }
 }
 
 module.exports = new ContactsClassicForm();

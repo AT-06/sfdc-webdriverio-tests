@@ -1,27 +1,28 @@
 'use strict';
-let config = require('../../../config.json');
-let loginPage = require('../../pages/login.page');
+let login = require('../../pages/login.page');
 let topSideBar = require('../../pages/topsidebar.page');
 let content = require('../../pages/content.page');
 let form = require(`../../pages/accounts/accountForm.${theme}.page`);
 
 describe('Acceptance Test to Delete an Account', function () {
 
-    let accountToDelete = 'Account to Delete';
+    let accountRequiredField = {
+        name: 'Account Delete'
+    };
 
     beforeEach(function () {
-        loginPage.login(config.username, config.password);
+        login.login(loginApplication.username, loginApplication.password);
         topSideBar.goToSection('accounts');
         content.clickOnNewButton();
-        form.fillAccountWithRequiredField(accountToDelete);
-
+        form.fillAccountFields(accountRequiredField);
+        expect(content.isNameOnContent(accountRequiredField.name), 'Account Name is not equal on Content Page').to.be.true;
     });
 
     it('Should allow to delete an account', function () {
         topSideBar.goToSection('accounts');
-        content.selectElementAndDeleteThis(accountToDelete);
+        content.selectElementAndDeleteThis(accountRequiredField.name);
         topSideBar.goToSection('accounts');
-        expect(content.isNameOnList(accountToDelete.name), 'Account is present on list').to.be.false;
+        expect(content.isNameOnList(accountRequiredField.name), 'Account is present on list').to.be.false;
 
     });
 
