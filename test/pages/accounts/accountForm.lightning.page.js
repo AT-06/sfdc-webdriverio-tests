@@ -2,6 +2,9 @@
 let AccountBase = require('./accountBaseForm.page');
 
 class AccountLightningForm extends AccountBase {
+    /**
+     * Constructor initializing all WebElements.
+     */
     constructor() {
         super();
         this.elementOnComboBox = '//a[@title="{}"]';

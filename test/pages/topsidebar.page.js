@@ -13,7 +13,6 @@ class TopSideBar {
      * Constructor initializing all WebElements.
      */
     constructor() {
-        this.plusButton = '//li[@id="AllTab_Tab"]/a | //div[@class="slds-icon-waffle"]/child::div';
         this.logo = {
             classic: 'img[title="Salesforce.com"]',
             light: 'div[class="slds-global-header__logo"]'
@@ -31,13 +30,6 @@ class TopSideBar {
      */
     clickOnPlusButton() {
         commonActions.clickWebElement(this.plusButton);
-    }
-
-    /**
-     * Method to go to section using Section PageObject.
-     */
-    clickOnSection(section) {
-        sectionPage.clickOnSectionButton(section);
     }
 
     /**
@@ -96,8 +88,8 @@ class TopSideBar {
     goToSection(section) {
         this.validateTheme();
         this.waitToPageLoad();
-        this.clickOnPlusButton();
-        this.clickOnSection(section);
+        sectionPage.clickOnPlusSectionButton();
+        sectionPage.clickOnSectionButton(section);
     }
 }
 

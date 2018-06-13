@@ -1,7 +1,7 @@
 'use strict';
 let loginPage = require('../../pages/login.page');
 let topSideBar = require('../../pages/topsidebar.page');
-let content = require('../../pages/content.page');
+let content = require(`../../pages/content.${theme}.page`);
 let form = require(`../../pages/accounts/accountForm.${theme}.page`);
 
 describe('Acceptance Test to Modify an Account', function () {
@@ -22,17 +22,17 @@ describe('Acceptance Test to Modify an Account', function () {
 
     beforeEach(function () {
         loginPage.login(loginApplication.username, loginApplication.password);
-        topSideBar.goToSection('accounts');
+        topSideBar.goToSection('Accounts');
         content.clickOnNewButton();
         form.fillAccountFields(accountToModify);
         expect(content.isNameOnContent(accountToModify.name), 'Account Name is not equal on Content Page').to.be.true;
     });
 
     it('Should allow to update/modify new account with required fields', function () {
-        topSideBar.goToSection('accounts');
+        topSideBar.goToSection('Accounts');
         content.selectElementAndEditThis(accountToModify);
         form.fillAccountFields(accountModified);
-        topSideBar.goToSection('accounts');
+        topSideBar.goToSection('Accounts');
         content.clickLastElementOnList(accountModified.name);
         expect(content.isNameOnContent(accountModified.name), 'Account Name is not equal on Content Page').to.be.true;
     });

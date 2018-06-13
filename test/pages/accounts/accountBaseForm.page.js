@@ -3,10 +3,19 @@ let commonActions = require("../../utils/CommonActions");
 let Form = require('../form.page');
 
 class AccountBaseForm extends Form {
+    /**
+     * Constructor initializing all WebElements.
+     */
     constructor() {
         super();
     }
 
+    /**
+     * Method to fill the account fields.
+     * @param accountInformation json with account fields selectors.
+     * @param accountDataValue json with account fields values.
+     * @param elementOnComboBox selector.
+     */
     fillAccountWithAllFieldsAndSave(accountInformation, accountDataValue, elementOnComboBox) {
         let fillAccountInformation = {
             'name': () => this.setAccountInput(accountInformation.name, accountDataValue.name),
@@ -25,10 +34,21 @@ class AccountBaseForm extends Form {
 
     }
 
+    /**
+     * Method to set the account input text.
+     * @param elementCss selector.
+     * @param accountText value to set.
+     */
     setAccountInput(elementCss, accountText) {
         commonActions.setInputTextField(elementCss, accountText);
     }
 
+    /**
+     * Method to set on combo box.
+     * @param elementCss selector.
+     * @param accountText value to set.
+     * @param elementOnComboBox selector.
+     */
     setAccountOnComboBox(elementCss, accountText, elementOnComboBox) {
         commonActions.selectOnComboBox(elementCss, accountText, elementOnComboBox);
     }

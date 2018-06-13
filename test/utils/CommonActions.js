@@ -32,16 +32,6 @@ class CommonActions {
     }
 
     /**
-     * Method to persist click on element.
-     * @param elementCSS WebElement locator.
-     */
-    static clickAndExpectElement(elementCSS) {
-        browser.waitUntil(function () {
-            return browser.click(elementCSS);
-        }, timeToWait);
-    }
-
-    /**
      * Method to click on element.
      * @param elementCSS WebElement locator.
      */
@@ -141,11 +131,6 @@ class CommonActions {
     static isCurrentThemeClassic(logo) {
         this.waitElements(logo.classic, logo.light);
         return browser.isVisible(logo.classic);
-    }
-
-    static getSelector(selector) {
-        this.waitElements(selector.classic, selector.lightning);
-        return browser.isVisible(selector.classic) ? selector.classic : selector.lightning;
     }
 
     static pauseInSeconds(time) {

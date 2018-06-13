@@ -1,7 +1,10 @@
+'use strict';
 let ContactsBaseForm = require('./contactsBaseForm.page');
 
 class ContactsClassicForm extends ContactsBaseForm {
-
+    /**
+     * Constructor initializing all WebElements.
+     */
     constructor() {
         super();
         this.elementOnComboBox = '//option[@value="{}"]';
@@ -21,10 +24,13 @@ class ContactsClassicForm extends ContactsBaseForm {
             country: '//input[@id="con19country"]',
             languages: '//label[text()="Languages"]/parent::td/following-sibling::td/child::input',
             description: '//input[@id="con20"]'
-
         };
     }
 
+    /**
+     * Method to fill the contact fields.
+     * @param contactData the contact values.
+     */
     fillContactFields(contactData) {
         this.fillContactWithAllFieldsAndSave(this.contactInformation, contactData, this.elementOnComboBox);
     }
