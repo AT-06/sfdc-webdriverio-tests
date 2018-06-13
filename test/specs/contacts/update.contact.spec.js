@@ -1,7 +1,7 @@
 'use strict';
 let login = require('../../pages/common/login.page');
-let topSideBar = require(`../../pages/topsidebar.${theme}.page`);
-let content = require(`../../pages/content.${theme}.page`);
+let topSideBar = require(`../../pages/common/topsidebar.${theme}.page`);
+let content = require(`../../pages/common/content.${theme}.page`);
 let form = require(`../../pages/contacts/contactsForm.${theme}.page`);
 
 describe('Acceptance Test to Modify a Contact', function () {

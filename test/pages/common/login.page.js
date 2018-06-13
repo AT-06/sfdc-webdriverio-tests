@@ -1,5 +1,5 @@
 'use strict';
-let commonActions = require('../../utils/CommonActions.js');
+let commonActions = require('../../utils/commonActions.js');
 
 /**
  * Page Object to login on SalesForce.

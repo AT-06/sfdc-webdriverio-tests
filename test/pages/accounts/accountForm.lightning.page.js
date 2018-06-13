@@ -26,12 +26,13 @@ class AccountLightningForm extends AccountBase {
             sicCode: '//span[text()="SIC Code"]/parent::label/following-sibling::input'
         };
     }
+
     /**
      * Method to fill the account fields.
      * @param accountData the contact values.
      */
     fillAccountFields(accountData) {
-        this.fillAccountWithAllFieldsAndSave(this.accountInformation, accountData, this.elementOnComboBox);
+        this.fillAccountWithAllFieldsAndSave(this.accountInformation, accountData);
     }
 
 }

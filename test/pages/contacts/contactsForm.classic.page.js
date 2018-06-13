@@ -32,7 +32,7 @@ class ContactsClassicForm extends ContactsBaseForm {
      * @param contactData the contact values.
      */
     fillContactFields(contactData) {
-        this.fillContactWithAllFieldsAndSave(this.contactInformation, contactData, this.elementOnComboBox);
+        this.fillContactWithAllFieldsAndSave(this.contactInformation, contactData);
     }
 
 }

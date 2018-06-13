@@ -7,7 +7,7 @@ class AccountClassicForm extends AccountBase {
      */
     constructor() {
         super();
-        this.elementOnComboBox = '//a[@title="{}"]';
+        this.elementOnComboBox = '//option[@value="{}"]';
         this.accountInformation = {
             name: '//input[@id="acc2"]',
             parent: '//input[@id="acc3"]',
@@ -26,12 +26,13 @@ class AccountClassicForm extends AccountBase {
             sicCode: '//input[@id="acc16"]'
         };
     }
+
     /**
      * Method to fill the account fields.
      * @param accountData the contact values.
      */
     fillAccountFields(accountData) {
-        this.fillAccountWithAllFieldsAndSave(this.accountInformation, accountData, this.elementOnComboBox);
+        this.fillAccountWithAllFieldsAndSave(this.accountInformation, accountData);
     }
 
 }

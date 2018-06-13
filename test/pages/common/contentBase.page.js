@@ -1,5 +1,5 @@
 'use strict';
-let commonActions = require('../../utils/CommonActions.js');
+let commonActions = require('../../utils/commonActions.js');
 
 class ContentBase {
     /**
@@ -13,11 +13,16 @@ class ContentBase {
      * Method to click element on list.
      * @param element css locator.
      */
-    clickLastElementOnList(element) {
-        let lastElementOnList = `//a[text()="${element}"]`;
-        commonActions.clickWebElement(lastElementOnList);
+    clickLastElementOnTheList(element) {
+        commonActions.clickWebElement(this.getLastElementOnTheList(element));
     }
-
+    /**
+     * Method to get element on list.
+     * @param element css locator.
+     */
+    getLastElementOnTheList(element) {
+        return `//a[text()="${element}"]`;
+    }
     /**
      * Method to verify on content.
      *

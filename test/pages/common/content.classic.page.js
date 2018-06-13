@@ -1,5 +1,5 @@
 'use strict';
-let commonActions = require('../../utils/CommonActions.js');
+let commonActions = require('../../utils/commonActions.js');
 let ContentBase = require('./contentBase.page');
 
 class ContentClassic extends ContentBase {
@@ -49,6 +49,13 @@ class ContentClassic extends ContentBase {
         this.clickLastElementOnList(element);
         this.clickOnEditButton();
         commonActions.pauseInSeconds(2);
+    }
+    /**
+     * Method to click element on list.
+     * @param element css locator.
+     */
+    clickLastElementOnList(element) {
+        this.clickLastElementOnTheList(element);
     }
 
     /**

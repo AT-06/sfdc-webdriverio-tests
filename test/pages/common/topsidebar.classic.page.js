@@ -1,4 +1,4 @@
-let commonActions = require('../../utils/CommonActions');
+let commonActions = require('../../utils/commonActions');
 let sectionPage = require('./section.page');
 
 class TopSideBarClassic {

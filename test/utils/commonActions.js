@@ -1,7 +1,5 @@
 'use strict';
-const format = require('string-format');
 const timeToWait = 30000;
-const config = require('../../config');
 
 /**
  * CommonActions class with CommonActions Methods.
@@ -18,7 +16,6 @@ class CommonActions {
                 && browser.isExisting(elementCSS);
         }, timeToWait);
     }
-
 
     /**
      * Method to click on element.
@@ -63,20 +60,10 @@ class CommonActions {
      * @param elementCss comboBox.
      * @param elementToSelect select text on comboBox.
      */
-    static selectOnComboBox(elementCss, elementToSelect, elementOnComboBox) {
+    static selectOnComboBox(elementCss, elementToSelect) {
         this.clickWebElement(elementCss);
-        let css = format(elementOnComboBox, elementToSelect, elementToSelect);
+        let css = theme == 'classic' ? `option[value="${elementToSelect}"]` : `a[title="${elementToSelect}"]`;
         this.clickWebElement(css);
-    }
-
-    /**
-     * @param elementName element to to search and click on list.
-     * @param keyLocatorOnList key locator on list.
-     */
-    static clickLastElementOnList(elementName, keyLocatorOnList) {
-        let elementToClick = format(keyLocatorOnList, elementName);
-        this.pauseInSeconds(2);
-        this.clickWebElement(elementToClick);
     }
 
     /**
@@ -105,16 +92,26 @@ class CommonActions {
     }
 
     /**
-     * Method to verify is element visible.
+     * Method to verify is url is lightning.
      * @return Boolean true if the url contains lightning.
      */
     static isThemeLightning() {
-        this.pauseInSeconds(4);
+        this.pauseInSeconds(3);
         return browser.getUrl().includes('lightning');
     }
 
     /**
+     * Method to verify is element visible.
+     * @return Boolean true if exits.
+     */
+    static elementExist(element) {
+        this.pauseInSeconds(2);
+        return browser.isExisting(element);
+    }
+
+    /**
      * Method to pause the browser.
+     * @param time.
      */
     static pauseInSeconds(time) {
         browser.pause(time * 1000);

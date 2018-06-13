@@ -1,5 +1,5 @@
 'use strict';
-let commonActions = require('../../utils/CommonActions.js');
+let commonActions = require('../../utils/commonActions.js');
 let ContentBase = require('./contentBase.page');
 
 class ContentLightning extends ContentBase {
@@ -52,6 +52,14 @@ class ContentLightning extends ContentBase {
     }
 
     /**
+     * Method to click element on list.
+     * @param element css locator.
+     */
+    clickLastElementOnList(element) {
+        this.clickLastElementOnTheList(element);
+    }
+
+    /**
      * Method to select a element and edit this.
      * @param element to modify
      */
@@ -83,6 +91,16 @@ class ContentLightning extends ContentBase {
     isNameOnContent(nameToVerify) {
         return this.isNameOnContentList(nameToVerify);
     }
+    /**
+     * Method to verify on List.
+     *
+     * @param nameToVerify name to verify.
+     * @return boolean is present on element
+     */
+    existOnList(nameToVerify) {
+        return commonActions.elementExist(this.getLastElementOnTheList(nameToVerify));
+    }
+
 }
 
 module.exports = new ContentLightning();

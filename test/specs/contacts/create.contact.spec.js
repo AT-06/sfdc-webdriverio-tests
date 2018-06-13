@@ -1,7 +1,7 @@
 'use strict';
 let login = require('../../pages/common/login.page');
-let topSideBar = require(`../../pages/topsidebar.${theme}.page`);
-let content = require(`../../pages/content.${theme}.page`);
+let topSideBar = require(`../../pages/common/topsidebar.${theme}.page`);
+let content = require(`../../pages/common/content.${theme}.page`);
 let form = require(`../../pages/contacts/contactsForm.${theme}.page`);
 
 describe('Acceptance Test to create new Contact', function () {
@@ -24,19 +24,19 @@ describe('Acceptance Test to create new Contact', function () {
     });
 
 
-    it('Should allow to add a new contact ', function () {
-        topSideBar.goToSection('Contacts');
-        content.clickOnNewButton();
-        form.fillContactFields(contactWithRequiredField);
-        expect(content.isNameOnContent(contactWithRequiredField.lastName), 'Contact Name is not equal on Content Page').to.be.true;
-    });
+    // it('Should allow to add a new contact ', function () {
+    //     topSideBar.goToSection('Contacts');
+    //     content.clickOnNewButton();
+    //     form.fillContactFields(contactWithRequiredField);
+    //     expect(content.isNameOnContent(contactWithRequiredField.lastName), 'Contact Name is not equal on Content Page').to.be.true;
+    // });
 
-    /** it('Should allow to add new contact with all information', function () {
+    it('Should allow to add new contact with all information', function () {
         topSideBar.goToSection('Contacts');
         content.clickOnNewButton();
         form.fillContactFields(contactData);
         expect(content.isNameOnContent(contactData.lastName), 'Contact Name is not equal on Content Page').to.be.true;
 
-    });**/
+    });
 
 });

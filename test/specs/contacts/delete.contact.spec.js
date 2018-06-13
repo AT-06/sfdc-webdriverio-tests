@@ -1,7 +1,7 @@
 'use strict';
 let loginPage = require('../../pages/common/login.page');
-let topSideBar = require(`../../pages/topsidebar.${theme}.page`);
-let content = require(`../../pages/content.${theme}.page`);
+let topSideBar = require(`../../pages/common/topsidebar.${theme}.page`);
+let content = require(`../../pages/common/content.${theme}.page`);
 let form = require(`../../pages/contacts/contactsForm.${theme}.page`);
 
 describe('Acceptance Test to Delete a Contact', function () {
@@ -22,7 +22,7 @@ describe('Acceptance Test to Delete a Contact', function () {
         topSideBar.goToSection('Contacts');
         content.selectElementAndDeleteThis(contactToDelete.lastName);
         topSideBar.goToSection('Contacts');
-        expect(content.isNameOnList(contactToDelete.lastName), 'Contact is present on list').to.be.false;
+        expect(content.existOnList(contactToDelete.lastName), 'Contact is present on list').to.be.false;
 
     });
 
