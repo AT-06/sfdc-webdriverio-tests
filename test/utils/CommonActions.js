@@ -19,17 +19,6 @@ class CommonActions {
         }, timeToWait);
     }
 
-    /**
-     * Method to wait a element.
-     * @param elementCSS1 WebElement locator.
-     * @param elementCSS2 WebElement locator.
-     */
-    static waitElements(elementCSS1, elementCSS2) {
-        browser.waitUntil(function () {
-            return browser.isExisting(elementCSS1)
-                || browser.isExisting(elementCSS2);
-        }, timeToWait);
-    }
 
     /**
      * Method to click on element.
@@ -81,21 +70,12 @@ class CommonActions {
     }
 
     /**
-     * @param elementName .
-     * @param keyLocatorOnList .
-     */
-    static isElementOnList(elementName, keyLocatorOnList) {
-        let elementToVerify = format(keyLocatorOnList, elementName);
-        return browser.isExisting(elementToVerify)
-    }
-
-    /**
      * @param elementName element to to search and click on list.
      * @param keyLocatorOnList key locator on list.
      */
     static clickLastElementOnList(elementName, keyLocatorOnList) {
         let elementToClick = format(keyLocatorOnList, elementName);
-        browser.pause(2000);
+        this.pauseInSeconds(2);
         this.clickWebElement(elementToClick);
     }
 
@@ -120,19 +100,22 @@ class CommonActions {
      * Method to wait spam bear after login on Lightning theme.
      */
     static waitToLightningBear() {
-        browser.waitForExist('div[class="auraLoadingBox oneLoadingBox loadingHide"]', 30000);
+        this.pauseInSeconds(3);
+        browser.waitForExist('div[class="auraLoadingBox oneLoadingBox loadingHide"]', timeToWait);
     }
 
     /**
-     * Method to verify is currently theme is Classic.
-     * @param logo is to identify theme.
-     * @return Boolean true if currently theme is Classic false is not.
+     * Method to verify is element visible.
+     * @return Boolean true if the url contains lightning.
      */
-    static isCurrentThemeClassic(logo) {
-        this.waitElements(logo.classic, logo.light);
-        return browser.isVisible(logo.classic);
+    static isThemeLightning() {
+        this.pauseInSeconds(4);
+        return browser.getUrl().includes('lightning');
     }
 
+    /**
+     * Method to pause the browser.
+     */
     static pauseInSeconds(time) {
         browser.pause(time * 1000);
     }

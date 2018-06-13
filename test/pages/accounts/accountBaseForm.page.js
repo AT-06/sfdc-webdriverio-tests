@@ -1,6 +1,6 @@
 'use strict';
 let commonActions = require("../../utils/CommonActions");
-let Form = require('../form.page');
+let Form = require('../common/form.page');
 
 class AccountBaseForm extends Form {
     /**

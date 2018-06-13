@@ -1,6 +1,6 @@
 'use strict';
-let login = require('../../pages/login.page');
-let topSideBar = require('../../pages/topsidebar.page');
+let login = require('../../pages/common/login.page');
+let topSideBar = require(`../../pages/topsidebar.${theme}.page`);
 let content = require(`../../pages/content.${theme}.page`);
 let form = require(`../../pages/accounts/accountForm.${theme}.page`);
 

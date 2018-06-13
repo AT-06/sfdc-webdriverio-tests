@@ -26,7 +26,10 @@ class AccountClassicForm extends AccountBase {
             sicCode: '//input[@id="acc16"]'
         };
     }
-
+    /**
+     * Method to fill the account fields.
+     * @param accountData the contact values.
+     */
     fillAccountFields(accountData) {
         this.fillAccountWithAllFieldsAndSave(this.accountInformation, accountData, this.elementOnComboBox);
     }

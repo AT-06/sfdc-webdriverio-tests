@@ -1,19 +1,16 @@
 'use strict';
-let commonActions = require('../utils/CommonActions.js');
+let commonActions = require('../../utils/CommonActions.js');
 let ContentBase = require('./contentBase.page');
 
-class ContentLightning extends ContentBase {
+class ContentClassic extends ContentBase {
     /**
      * Constructor initializing all WebElements.
      */
     constructor() {
         super();
-        this.newButton = '//a[@title="New"]/child::div';
-        this.editButton = '//ul[@class="scrollable"]/child::li/child::a[@title="Edit"]';
-        this.deleteButton = '//ul[@class="scrollable"]/child::li/child::a[@title="Delete"]';
-        this.dropDownMenu = '//a[@class="slds-grid slds-grid--vertical-align-center slds-grid--align-center ' +
-            'sldsButtonHeightFix" and not(@title="Show one more action")]';
-        this.deleteConfirmButton = '//span[text()="Delete"]';
+        this.newButton = '//input[@title="New"]';
+        this.editButton = '//input[@title="Edit"]';
+        this.deleteButton = '//input[@title="Delete"]';
     }
 
     /**
@@ -38,17 +35,10 @@ class ContentLightning extends ContentBase {
     }
 
     /**
-     * Method to click on Delete button.
-     */
-    clickOnDropDownButton() {
-        commonActions.clickWebElement(this.dropDownMenu);
-    }
-
-    /**
      * Method to click to confirm Delete button.
      */
     clickOnConfirmDelete() {
-        commonActions.clickWebElement(this.deleteConfirmButton);
+        commonActions.confirmAlert();
     }
 
     /**
@@ -57,7 +47,6 @@ class ContentLightning extends ContentBase {
      */
     selectElementAndEditThis(element) {
         this.clickLastElementOnList(element);
-        this.clickOnDropDownButton();
         this.clickOnEditButton();
         commonActions.pauseInSeconds(2);
     }
@@ -68,12 +57,10 @@ class ContentLightning extends ContentBase {
      */
     selectElementAndDeleteThis(element) {
         this.clickLastElementOnList(element);
-        this.clickOnDropDownButton()
         this.clickOnDeleteButton();
         this.clickOnConfirmDelete();
         commonActions.pauseInSeconds(2);
     }
-
     /**
      * Method to verify on content.
      *
@@ -85,4 +72,4 @@ class ContentLightning extends ContentBase {
     }
 }
 
-module.exports = new ContentLightning();
+module.exports = new ContentClassic();
