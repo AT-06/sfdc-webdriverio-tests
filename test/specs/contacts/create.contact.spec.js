@@ -14,24 +14,18 @@ describe('Acceptance Test to create new Contact', function () {
         mobile: '77777',
         email: 'grillo@gmail.com'
     };
-    let contactWithRequiredField = {
-        lastName: 'TheContact'
-    };
 
-    // Login application.
     beforeEach(function () {
         login.login(loginApplication.username, loginApplication.password);
     });
 
+    afterEach(function () {
+        topSideBar.goToSection('Contacts');
+        content.selectElementAndDeleteThis(contactData.lastName);
 
-    // it('Should allow to add a new contact ', function () {
-    //     topSideBar.goToSection('Contacts');
-    //     content.clickOnNewButton();
-    //     form.fillContactFields(contactWithRequiredField);
-    //     expect(content.isNameOnContent(contactWithRequiredField.lastName), 'Contact Name is not equal on Content Page').to.be.true;
-    // });
+    });
 
-    it('Should allow to add new contact with all information', function () {
+      it('Should allow to add new contact with all information', function () {
         topSideBar.goToSection('Contacts');
         content.clickOnNewButton();
         form.fillContactFields(contactData);

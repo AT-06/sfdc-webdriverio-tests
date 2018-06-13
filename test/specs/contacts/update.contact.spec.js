@@ -28,6 +28,12 @@ describe('Acceptance Test to Modify a Contact', function () {
         expect(content.isNameOnContent(contactWithRequiredField.lastName), 'Contact Name is not equal on Content Page').to.be.true;
     });
 
+    afterEach(function () {
+        topSideBar.goToSection('Contacts');
+        content.selectElementAndDeleteThis(contactModifiedData.lastName);
+
+    });
+
     it('Should allow to update/modify new contact with required fields', function () {
         topSideBar.goToSection('Contacts');
         content.selectElementAndEditThis(contactWithRequiredField.lastName);

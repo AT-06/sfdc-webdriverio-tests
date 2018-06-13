@@ -7,7 +7,6 @@ class AccountLightningForm extends AccountBase {
      */
     constructor() {
         super();
-        this.elementOnComboBox = '//a[@title="{}"]';
         this.accountInformation = {
             name: '//span[text()="Account Name"]/parent::label/following-sibling::input',
             parent: '//span[text()="Parent Account"]/parent::label/following-sibling::div/descendant::input',

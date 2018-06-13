@@ -7,7 +7,6 @@ class AccountClassicForm extends AccountBase {
      */
     constructor() {
         super();
-        this.elementOnComboBox = '//option[@value="{}"]';
         this.accountInformation = {
             name: '//input[@id="acc2"]',
             parent: '//input[@id="acc3"]',

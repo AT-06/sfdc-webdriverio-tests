@@ -28,6 +28,12 @@ describe('Acceptance Test to Modify an Account', function () {
         expect(content.isNameOnContent(accountToModify.name), 'Account Name is not equal on Content Page').to.be.true;
     });
 
+    afterEach(function () {
+        topSideBar.goToSection('Accounts');
+        content.selectElementAndDeleteThis(accountModified.name);
+
+    });
+
     it('Should allow to update/modify new account with required fields', function () {
         topSideBar.goToSection('Accounts');
         content.selectElementAndEditThis(accountToModify);

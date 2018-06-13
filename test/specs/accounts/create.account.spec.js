@@ -15,20 +15,15 @@ describe('Acceptance Test to create new Account', function () {
         rating: 'Hot',
         phone: 591591591
     };
-    let accountRequiredField = {
-        name: 'Account Required'
-    };
 
-    // Login application.
     beforeEach(function () {
         login.login(loginApplication.username, loginApplication.password);
     });
 
-    it('Should allow to add new account with required fields', function () {
+    afterEach(function () {
         topSideBar.goToSection('Accounts');
-        content.clickOnNewButton();
-        form.fillAccountFields(accountRequiredField);
-        expect(content.isNameOnContent(accountRequiredField.name), 'Account Name is not equal on Content Page').to.be.true;
+        content.selectElementAndDeleteThis(accountFullData.name);
+
     });
 
     it('Should allow to add new account with all information', function () {

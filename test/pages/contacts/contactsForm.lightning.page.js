@@ -7,7 +7,6 @@ class ContactsLightForm extends ContactsBaseForm {
      */
     constructor() {
         super();
-        this.elementOnComboBox = '//a[@title="{}"]';
         this.contactInformation = {
             lastName: '//span[text()="Last Name"]/parent::label/following-sibling::input',
             title: '//span[text()="Title"]/parent::label/following-sibling::input',

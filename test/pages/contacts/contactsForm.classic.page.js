@@ -7,7 +7,6 @@ class ContactsClassicForm extends ContactsBaseForm {
      */
     constructor() {
         super();
-        this.elementOnComboBox = '//option[@value="{}"]';
         this.contactInformation = {
             lastName: '//input[@id="name_lastcon2"]',
             title: '//input[@id="con5"]',
