@@ -2,9 +2,11 @@
 let AccountBase = require('./accountBaseForm.page');
 
 class AccountLightningForm extends AccountBase {
+    /**
+     * Constructor initializing all WebElements.
+     */
     constructor() {
         super();
-        this.elementOnComboBox = '//a[@title="{}"]';
         this.accountInformation = {
             name: '//span[text()="Account Name"]/parent::label/following-sibling::input',
             parent: '//span[text()="Parent Account"]/parent::label/following-sibling::div/descendant::input',
@@ -24,8 +26,12 @@ class AccountLightningForm extends AccountBase {
         };
     }
 
+    /**
+     * Method to fill the account fields.
+     * @param accountData the contact values.
+     */
     fillAccountFields(accountData) {
-        this.fillAccountWithAllFieldsAndSave(this.accountInformation, accountData, this.elementOnComboBox);
+        this.fillAccountWithAllFieldsAndSave(this.accountInformation, accountData);
     }
 
 }

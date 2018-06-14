@@ -1,10 +1,12 @@
-let AccountBaseForm = require('./contactsBaseForm.page');
+'use strict';
+let ContactsBaseForm = require('./contactsBaseForm.page');
 
-class ContactsLightForm extends AccountBaseForm {
-
+class ContactsLightForm extends ContactsBaseForm {
+    /**
+     * Constructor initializing all WebElements.
+     */
     constructor() {
         super();
-        this.elementOnComboBox = '//a[@title="{}"]';
         this.contactInformation = {
             lastName: '//span[text()="Last Name"]/parent::label/following-sibling::input',
             title: '//span[text()="Title"]/parent::label/following-sibling::input',
@@ -26,8 +28,12 @@ class ContactsLightForm extends AccountBaseForm {
 
     }
 
+    /**
+     * Method to fill the contact fields.
+     * @param contactData the contact values.
+     */
     fillContactFields(contactData) {
-        this.fillAccountWithAllFieldsAndSave(this.contactInformation, contactData, this.elementOnComboBox);
+        this.fillContactWithAllFieldsAndSave(this.contactInformation, contactData);
     }
 
 }

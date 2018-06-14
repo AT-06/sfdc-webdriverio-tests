@@ -2,9 +2,11 @@
 let AccountBase = require('./accountBaseForm.page');
 
 class AccountClassicForm extends AccountBase {
+    /**
+     * Constructor initializing all WebElements.
+     */
     constructor() {
         super();
-        this.elementOnComboBox = '//a[@title="{}"]';
         this.accountInformation = {
             name: '//input[@id="acc2"]',
             parent: '//input[@id="acc3"]',
@@ -24,8 +26,12 @@ class AccountClassicForm extends AccountBase {
         };
     }
 
+    /**
+     * Method to fill the account fields.
+     * @param accountData the contact values.
+     */
     fillAccountFields(accountData) {
-        this.fillAccountWithAllFieldsAndSave(this.accountInformation, accountData, this.elementOnComboBox);
+        this.fillAccountWithAllFieldsAndSave(this.accountInformation, accountData);
     }
 
 }
