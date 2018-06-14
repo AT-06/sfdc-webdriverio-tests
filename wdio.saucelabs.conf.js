@@ -16,3 +16,6 @@ var overrides = {
 
     }]
 };
+
+// Send the merged defaults to wdio
+exports.config = _.defaultsDeep(overrides, defaults);
