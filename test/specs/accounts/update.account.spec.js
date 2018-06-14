@@ -36,7 +36,7 @@ describe('Acceptance Test to Modify an Account', function () {
 
     it('Should allow to update/modify new account with required fields', function () {
         topSideBar.goToSection('Accounts');
-        content.selectElementAndEditThis(accountToModify);
+        content.selectElementAndEditThis(accountToModify.name);
         form.fillAccountFields(accountModified);
         topSideBar.goToSection('Accounts');
         content.clickLastElementOnList(accountModified.name);

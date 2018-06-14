@@ -14,6 +14,7 @@ class Section {
         if (theme == 'classic') {
             let sectionElement = `//img[@title="${section}"]/parent::a`;
             commonActions.clickWebElement(sectionElement);
+            commonActions.closePopMessage();
         }
         else {
             let sectionElement = `//a[@title="${section}"]/child::span/child::span`;
