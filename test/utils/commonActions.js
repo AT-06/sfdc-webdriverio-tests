@@ -117,6 +117,16 @@ class CommonActions {
         browser.pause(time * 1000);
     }
 
+    /**
+     * @param message popup message.
+     * @param closeButton close button on popup message at Classic Theme.
+     */
+    static closePopMessage() {
+        if (browser.isVisible('#lexNoThanks')) {
+            this.clickWebElement('#tryLexDialogX');
+        }
+    }
+
 }
 
 module.exports = CommonActions;

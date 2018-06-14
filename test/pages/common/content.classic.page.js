@@ -50,6 +50,7 @@ class ContentClassic extends ContentBase {
         this.clickOnEditButton();
         commonActions.pauseInSeconds(2);
     }
+
     /**
      * Method to click element on list.
      * @param element css locator.
@@ -68,6 +69,7 @@ class ContentClassic extends ContentBase {
         this.clickOnConfirmDelete();
         commonActions.pauseInSeconds(2);
     }
+
     /**
      * Method to verify on content.
      *
@@ -76,6 +78,16 @@ class ContentClassic extends ContentBase {
      */
     isNameOnContent(nameToVerify) {
         return this.isNameOnContentList(nameToVerify);
+    }
+
+    /**
+     * Method to verify on List.
+     *
+     * @param nameToVerify name to verify.
+     * @return boolean is present on element
+     */
+    existOnList(nameToVerify) {
+        return commonActions.elementExist(this.getLastElementOnTheList(nameToVerify));
     }
 }
 
