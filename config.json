@@ -1,5 +1,13 @@
 {
   "username": "",
   "password": "",
-  "theme": ""
+  "theme": "",
+
+  "sauceUserName": "",
+  "sauceKEY": "",
+
+  "browserName": "",
+  "platform": "",
+  "version": ""
+
 }
