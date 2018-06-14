@@ -1,21 +1,29 @@
-let commonActions = require("../../utils/CommonActions");
-let Form = require('../form.page');
+let commonActions = require("../../utils/commonActions");
+let Form = require('../common/form.page');
 
 class ContactsBaseForm extends Form {
+    /**
+     * Constructor initializing all WebElements.
+     */
     constructor() {
         super();
     }
 
-    fillContactWithAllFieldsAndSave(contactInformation, contactDataValue, elementOnComboBox) {
+    /**
+     * Method to fill the contact fields.
+     * @param contactInformation json with contact fields selectors.
+     * @param contactDataValue json with contact fields values.
+     */
+    fillContactWithAllFieldsAndSave(contactInformation, contactDataValue) {
         let fillContactInformation = {
             'lastName': () => this.setContactInput(contactInformation.lastName, contactDataValue.lastName),
             'phone': () => this.setContactInput(contactInformation.phone, contactDataValue.phone),
             'mobile': () => this.setContactInput(contactInformation.mobile, contactDataValue.mobile),
             'title': () => this.setContactInput(contactInformation.title, contactDataValue.title),
             'department': () => this.setContactInput(contactInformation.department, contactDataValue.department),
-            'leadSource': () => this.setContactOnComboBox(contactInformation.leadSource, contactDataValue.leadSource, elementOnComboBox),
+            'leadSource': () => this.setContactOnComboBox(contactInformation.leadSource, contactDataValue.leadSource),
             'email': () => this.setContactInput(contactInformation.email, contactDataValue.email),
-        }
+        };
         Object.keys(contactDataValue).forEach(key => {
             fillContactInformation[key].call();
         });
@@ -23,12 +31,22 @@ class ContactsBaseForm extends Form {
 
     }
 
+    /**
+     * Method to set the contact input text.
+     * @param elementCss selector.
+     * @param contactText value to set.
+     */
     setContactInput(elementCss, contactText) {
         commonActions.setInputTextField(elementCss, contactText);
     }
 
-    setContactOnComboBox(elementCss, contactText, elementOnComboBox) {
-        commonActions.selectOnComboBox(elementCss, contactText, elementOnComboBox);
+    /**
+     * Method to set on combo box.
+     * @param elementCss selector.
+     * @param contactText value to set.
+     */
+    setContactOnComboBox(elementCss, contactText) {
+        commonActions.selectOnComboBox(elementCss, contactText);
     }
 
 }

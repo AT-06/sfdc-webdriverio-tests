@@ -1,7 +1,5 @@
 'use strict';
-const format = require('string-format');
 const timeToWait = 30000;
-const config = require('../../config');
 
 /**
  * CommonActions class with CommonActions Methods.
@@ -16,28 +14,6 @@ class CommonActions {
         browser.waitUntil(function () {
             return browser.isVisible(elementCSS)
                 && browser.isExisting(elementCSS);
-        }, timeToWait);
-    }
-
-    /**
-     * Method to wait a element.
-     * @param elementCSS1 WebElement locator.
-     * @param elementCSS2 WebElement locator.
-     */
-    static waitElements(elementCSS1, elementCSS2) {
-        browser.waitUntil(function () {
-            return browser.isExisting(elementCSS1)
-                || browser.isExisting(elementCSS2);
-        }, timeToWait);
-    }
-
-    /**
-     * Method to persist click on element.
-     * @param elementCSS WebElement locator.
-     */
-    static clickAndExpectElement(elementCSS) {
-        browser.waitUntil(function () {
-            return browser.click(elementCSS);
         }, timeToWait);
     }
 
@@ -84,29 +60,10 @@ class CommonActions {
      * @param elementCss comboBox.
      * @param elementToSelect select text on comboBox.
      */
-    static selectOnComboBox(elementCss, elementToSelect, elementOnComboBox) {
+    static selectOnComboBox(elementCss, elementToSelect) {
         this.clickWebElement(elementCss);
-        let css = format(elementOnComboBox, elementToSelect, elementToSelect);
+        let css = theme == 'classic' ? `option[value="${elementToSelect}"]` : `a[title="${elementToSelect}"]`;
         this.clickWebElement(css);
-    }
-
-    /**
-     * @param elementName .
-     * @param keyLocatorOnList .
-     */
-    static isElementOnList(elementName, keyLocatorOnList) {
-        let elementToVerify = format(keyLocatorOnList, elementName);
-        return browser.isExisting(elementToVerify)
-    }
-
-    /**
-     * @param elementName element to to search and click on list.
-     * @param keyLocatorOnList key locator on list.
-     */
-    static clickLastElementOnList(elementName, keyLocatorOnList) {
-        let elementToClick = format(keyLocatorOnList, elementName);
-        browser.pause(2000);
-        this.clickWebElement(elementToClick);
     }
 
     /**
@@ -130,24 +87,32 @@ class CommonActions {
      * Method to wait spam bear after login on Lightning theme.
      */
     static waitToLightningBear() {
-        browser.waitForExist('div[class="auraLoadingBox oneLoadingBox loadingHide"]', 30000);
+        this.pauseInSeconds(3);
+        browser.waitForExist('div[class="auraLoadingBox oneLoadingBox loadingHide"]', timeToWait);
     }
 
     /**
-     * Method to verify is currently theme is Classic.
-     * @param logo is to identify theme.
-     * @return Boolean true if currently theme is Classic false is not.
+     * Method to verify is url is lightning.
+     * @return Boolean true if the url contains lightning.
      */
-    static isCurrentThemeClassic(logo) {
-        this.waitElements(logo.classic, logo.light);
-        return browser.isVisible(logo.classic);
+    static isThemeLightning() {
+        this.pauseInSeconds(3);
+        return browser.getUrl().includes('lightning');
     }
 
-    static getSelector(selector) {
-        this.waitElements(selector.classic, selector.lightning);
-        return browser.isVisible(selector.classic) ? selector.classic : selector.lightning;
+    /**
+     * Method to verify is element visible.
+     * @return Boolean true if exits.
+     */
+    static elementExist(element) {
+        this.pauseInSeconds(2);
+        return browser.isExisting(element);
     }
 
+    /**
+     * Method to pause the browser.
+     * @param time.
+     */
     static pauseInSeconds(time) {
         browser.pause(time * 1000);
     }
