@@ -12,7 +12,8 @@
     "saucelabs": "wdio wdio.saucelabs.conf.js",
     "smartphone": "wdio wdio.smartphone.conf.js",
     "dockerFirefox": "wdio wdio.dockerFirefox.conf.js",
-    "dockerChrome": "wdio wdio.dockerChrome.conf.js"
+    "dockerChrome": "wdio wdio.dockerChrome.conf.js",
+    "lint": "eslint . --cache --format node_modules/eslint-friendly-formatter --ext .js"
   },
   "keywords": [],
   "author": "",
@@ -20,11 +21,13 @@
   "devDependencies": {
     "allure": "0.0.0",
     "chai": "^4.1.2",
+    "eslint-plugin-webdriverio": "^1.0.1",
     "wdio-allure-reporter": "^0.6.2",
     "wdio-docker-service": "^1.2.0",
+    "wdio-eslint-service": "0.0.3",
     "wdio-mocha-framework": "^0.5.13",
     "wdio-sauce-service": "^0.4.8",
-    "webdriverio": "^4.12.0"
+    "webdriverio": "^4.13.2"
   },
   "dependencies": {
     "mocha": "^5.1.1",

@@ -1,4 +1,9 @@
 # sfdc-webdriverio-tests
+
+[![Build status](https://travis-ci.org/AT-06/sfdc-webdriverio-tests.svg?branch=develop)](https://travis-ci.org/AT-06/sfdc-webdriverio-tests) 
+
+[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=at-06-sfdc-webdriverio-tests&metric=alert_status)](https://sonarcloud.io/dashboard/index/at-06-sfdc-webdriverio-tests)
+
 Sales Force Automation project has as main objective to automate
 acceptance test cases of Sales Force web using WebdriverIO,Mocha 
 and Chai library.
