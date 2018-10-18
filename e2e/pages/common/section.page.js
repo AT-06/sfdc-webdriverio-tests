@@ -11,7 +11,7 @@ class Section {
      * @param section to go.
      */
     clickOnSectionButton(section) {
-        if (theme == 'classic') {
+        if (theme === 'classic') {
             let sectionElement = `//img[@title="${section}"]/parent::a`;
             commonActions.clickWebElement(sectionElement);
             commonActions.closePopMessage();
@@ -26,7 +26,7 @@ class Section {
      * Method to click on plus button
      */
     clickOnPlusSectionButton() {
-        if (theme == 'classic') {
+        if (theme === 'classic') {
             let plusButton = '//li[@id="AllTab_Tab"]/a';
             commonActions.clickWebElement(plusButton);
         }
