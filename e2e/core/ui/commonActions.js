@@ -24,7 +24,6 @@ class CommonActions {
     static clickWebElement(elementCSS) {
         this.moveToComponent(elementCSS);
         browser.click(elementCSS);
-
     }
 
     /**
@@ -62,7 +61,7 @@ class CommonActions {
      */
     static selectOnComboBox(elementCss, elementToSelect) {
         this.clickWebElement(elementCss);
-        let css = theme == 'classic' ? `option[value="${elementToSelect}"]` : `a[title="${elementToSelect}"]`;
+        let css = theme === 'classic' ? `option[value="${elementToSelect}"]` : `a[title="${elementToSelect}"]`;
         this.clickWebElement(css);
     }
 
@@ -87,7 +86,6 @@ class CommonActions {
      * Method to wait spam bear after login on Lightning theme.
      */
     static waitToLightningBear() {
-        this.pauseInSeconds(3);
         browser.waitForExist('div[class="auraLoadingBox oneLoadingBox loadingHide"]', timeToWait);
     }
 
@@ -96,7 +94,6 @@ class CommonActions {
      * @return Boolean true if the url contains lightning.
      */
     static isThemeLightning() {
-        this.pauseInSeconds(3);
         return browser.getUrl().includes('lightning');
     }
 
@@ -105,16 +102,7 @@ class CommonActions {
      * @return Boolean true if exits.
      */
     static elementExist(element) {
-        this.pauseInSeconds(2);
         return browser.isExisting(element);
-    }
-
-    /**
-     * Method to pause the browser.
-     * @param time.
-     */
-    static pauseInSeconds(time) {
-        browser.pause(time * 1000);
     }
 
     /**

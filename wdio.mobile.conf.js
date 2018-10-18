@@ -1,6 +1,6 @@
 // Let's load the default configs:
-var defaults = require("./wdio.conf.js").config;
-var _ = require("lodash");
+var defaults = require('./wdio.conf.js').config;
+var _ = require('lodash');
 const ResponsiveService = require('wdio-responsive-service/lib/responsive-service');
 
 var overrides = {

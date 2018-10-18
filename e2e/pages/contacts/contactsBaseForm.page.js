@@ -1,4 +1,4 @@
-let commonActions = require("../../utils/commonActions");
+let commonActions = require('../../core/ui/commonActions');
 let Form = require('../common/form.page');
 
 class ContactsBaseForm extends Form {

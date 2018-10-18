@@ -1,5 +1,5 @@
 'use strict';
-let commonActions = require('../../utils/commonActions.js');
+let commonActions = require('../../core/ui/commonActions.js');
 
 /**
  * Page Object to login on SalesForce.
@@ -10,7 +10,7 @@ class LoginPage {
      * Constructor initializing all WebElements.
      */
     constructor() {
-        browser.addCommand(`waitAndClick`, function () {
+        browser.addCommand('waitAndClick', function () {
             return browser
                 .waitForVisible(arguments[0])
                 .then(() => {

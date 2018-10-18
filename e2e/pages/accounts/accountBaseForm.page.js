@@ -1,5 +1,5 @@
 'use strict';
-let commonActions = require("../../utils/commonActions");
+let commonActions = require('../../core/ui/commonActions');
 let Form = require('../common/form.page');
 
 class AccountBaseForm extends Form {
@@ -25,7 +25,7 @@ class AccountBaseForm extends Form {
             'annualRevenue': () => this.setAccountInput(accountInformation.annualRevenue, accountDataValue.annualRevenue),
             'rating': () => this.setAccountOnComboBox(accountInformation.rating, accountDataValue.rating),
             'phone': () => this.setAccountInput(accountInformation.phone, accountDataValue.phone),
-        }
+        };
         Object.keys(accountDataValue).forEach(key => {
             fillAccountInformation[key].call();
         });

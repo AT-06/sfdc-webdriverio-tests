@@ -1,19 +1,16 @@
 'use strict';
-let commonActions = require('../../utils/commonActions.js');
+let commonActions = require('../../core/ui/commonActions.js');
 let ContentBase = require('./contentBase.page');
 
-class ContentLightning extends ContentBase {
+class ContentClassic extends ContentBase {
     /**
      * Constructor initializing all WebElements.
      */
     constructor() {
         super();
-        this.newButton = '//a[@title="New"]/child::div';
-        this.editButton = '//ul[@class="scrollable"]/child::li/child::a[@title="Edit"]';
-        this.deleteButton = '//ul[@class="scrollable"]/child::li/child::a[@title="Delete"]';
-        this.dropDownMenu = '//a[@class="slds-grid slds-grid--vertical-align-center slds-grid--align-center ' +
-            'sldsButtonHeightFix" and not(@title="Show one more action")]';
-        this.deleteConfirmButton = '//span[text()="Delete"]';
+        this.newButton = '//input[@title="New"]';
+        this.editButton = '//input[@title="Edit"]';
+        this.deleteButton = '//input[@title="Delete"]';
     }
 
     /**
@@ -38,17 +35,19 @@ class ContentLightning extends ContentBase {
     }
 
     /**
-     * Method to click on Delete button.
-     */
-    clickOnDropDownButton() {
-        commonActions.clickWebElement(this.dropDownMenu);
-    }
-
-    /**
      * Method to click to confirm Delete button.
      */
     clickOnConfirmDelete() {
-        commonActions.clickWebElement(this.deleteConfirmButton);
+        commonActions.confirmAlert();
+    }
+
+    /**
+     * Method to select a element and edit this.
+     * @param element to modify
+     */
+    selectElementAndEditThis(element) {
+        this.clickLastElementOnList(element);
+        this.clickOnEditButton();
     }
 
     /**
@@ -60,26 +59,13 @@ class ContentLightning extends ContentBase {
     }
 
     /**
-     * Method to select a element and edit this.
-     * @param element to modify
-     */
-    selectElementAndEditThis(element) {
-        this.clickLastElementOnList(element);
-        this.clickOnDropDownButton();
-        this.clickOnEditButton();
-        commonActions.pauseInSeconds(2);
-    }
-
-    /**
      * Method to select a element and delete this.
      * @param element to delete
      */
     selectElementAndDeleteThis(element) {
         this.clickLastElementOnList(element);
-        this.clickOnDropDownButton()
         this.clickOnDeleteButton();
         this.clickOnConfirmDelete();
-        commonActions.pauseInSeconds(2);
     }
 
     /**
@@ -91,6 +77,7 @@ class ContentLightning extends ContentBase {
     isNameOnContent(nameToVerify) {
         return this.isNameOnContentList(nameToVerify);
     }
+
     /**
      * Method to verify on List.
      *
@@ -100,7 +87,6 @@ class ContentLightning extends ContentBase {
     existOnList(nameToVerify) {
         return commonActions.elementExist(this.getLastElementOnTheList(nameToVerify));
     }
-
 }
 
-module.exports = new ContentLightning();
+module.exports = new ContentClassic();

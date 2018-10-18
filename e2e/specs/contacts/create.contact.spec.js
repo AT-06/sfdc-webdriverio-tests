@@ -25,7 +25,7 @@ describe('Acceptance Test to create new Contact', function () {
 
     });
 
-      it('Should allow to add new contact with all information', function () {
+    it('Should allow to add new contact with all information', function () {
         topSideBar.goToSection('Contacts');
         content.clickOnNewButton();
         form.fillContactFields(contactData);
