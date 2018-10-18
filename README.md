@@ -1,8 +1,8 @@
 # sfdc-webdriverio-tests
 
-[![Build status](https://travis-ci.org/AT-06/sfdc-webdriverio-tests.svg?branch=develop)](https://travis-ci.org/AT-06/sfdc-webdriverio-tests) 
+[![Build status](https://travis-ci.org/awt-solutions/sfdc-webdriverio-tests.svg?branch=develop)](https://travis-ci.org/awt-solutions/sfdc-webdriverio-tests) 
 
-[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=at-06-sfdc-webdriverio-tests&metric=alert_status)](https://sonarcloud.io/dashboard/index/at-06-sfdc-webdriverio-tests)
+[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=awt-solutions-sfdc-webdriverio-tests&metric=alert_status)](https://sonarcloud.io/dashboard/index/awt-solutions-sfdc-webdriverio-tests)
 
 Sales Force Automation project has as main objective to automate
 acceptance test cases of Sales Force web using WebdriverIO,Mocha 
@@ -22,7 +22,7 @@ The tools needed to execute the tests are the following:
     - node js version 8.11.3
     - selenium-standalone
     - WebStorm IDE
-    - Download the project:https://github.com/AT-06/sfdc-webdriverio-tests
+    - Download the project:https://github.com/awt-solutions/sfdc-webdriverio-tests
 
 
 - **Executing tests**

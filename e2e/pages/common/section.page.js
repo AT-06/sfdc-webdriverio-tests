@@ -1,5 +1,5 @@
 'use strict';
-let commonActions = require('../../utils/commonActions.js');
+let commonActions = require('../../core/ui/commonActions.js');
 
 /**
  * Page Object of dynamic Sections.

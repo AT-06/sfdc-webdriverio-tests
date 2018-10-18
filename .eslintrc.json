@@ -63,6 +63,7 @@
     "sr": true,
     "config": true,
     "expect": true,
+    "loginApplication": true,
     "theme": true
   }
 }

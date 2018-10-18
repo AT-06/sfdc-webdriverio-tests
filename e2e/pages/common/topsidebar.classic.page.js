@@ -1,12 +1,13 @@
-let commonActions = require('../../utils/commonActions');
+let commonActions = require('../../core/ui/commonActions');
 let sectionPage = require('./section.page');
 
-class TopSideBarLightning {
+class TopSideBarClassic {
     /**
      * Constructor initializing all WebElements.
      */
     constructor() {
-        this.switchThemeToLight = 'a[class="switch-to-lightning"]';
+        this.userProfileLink = '.branding-user-profile';
+        this.switchThemeToClassic = '//div[@class="profile-card-footer"]/child::a';
 
     }
 
@@ -19,12 +20,12 @@ class TopSideBarLightning {
     }
 
     /**
-     * Method to switch to Lightning Theme.
+     * Method to switch to Classic Theme.
      */
     validateToSwitch() {
-        if (!this.isLightning()) {
-            commonActions.clickWebElement(this.switchThemeToLight)
-            commonActions.waitToLightningBear();
+        if (this.isLightning()) {
+            commonActions.clickWebElement(this.userProfileLink);
+            commonActions.clickWebElement(this.switchThemeToClassic);
         }
     }
 
@@ -38,4 +39,4 @@ class TopSideBarLightning {
     }
 }
 
-module.exports = new TopSideBarLightning();
+module.exports = new TopSideBarClassic();
