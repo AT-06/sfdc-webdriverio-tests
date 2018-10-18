@@ -56,19 +56,4 @@ In order to execute the tests is necessary these configurations:
 - To execute the tests open a command prompt 
 where dependencies where downloaded  and write:
     
-        npm test
- 
- # Contacts
- 
- If you want to be informed about new code releases, bug fixes, 
- security fixes, general news and information about sfdc-webdriverio-tests project 
- check to the GitHub repository -https://github.com/AT-06/sfdc-webdriverio-tests
- 
-  # Contributors
-  
-  - Escarleth Ledezma (EscarlethFatima) - https://github.com/EscarlethFatima
-  
-  - Omar Huanca (omar-limbert) - https://github.com/omar-limbert
-    
-  - Christian Galarza (Chritian92) - https://github.com/Chritian92
-  
+        npm test  
