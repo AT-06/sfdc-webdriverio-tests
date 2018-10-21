@@ -13,7 +13,7 @@
     "smartphone": "wdio wdio.smartphone.conf.js",
     "dockerFirefox": "wdio wdio.dockerFirefox.conf.js",
     "dockerChrome": "wdio wdio.dockerChrome.conf.js",
-    "lint": "eslint . --cache --format node_modules/eslint-friendly-formatter --ext .js"
+    "lint": "eslint . --cache --fix --format node_modules/eslint-friendly-formatter --ext .js"
   },
   "keywords": [],
   "author": "",
