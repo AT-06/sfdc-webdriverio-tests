@@ -6,3 +6,4 @@ package-lock.json
 /errorShots/
 allure-results/
 .eslintcache
+config.json
