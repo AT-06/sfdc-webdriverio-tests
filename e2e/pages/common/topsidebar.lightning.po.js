@@ -1,29 +1,24 @@
-let commonActions = require('../../core/ui/commonActions');
-let sectionPage = require('./section.page');
+'use strict';
+
+const commonActions = require('../../core/ui/commonActions');
+const sectionPage = require('./section.po');
 
 class TopSideBarLightning {
-    /**
-     * Constructor initializing all WebElements.
-     */
-    constructor() {
-        this.switchThemeToLight = 'a[class="switch-to-lightning"]';
-
-    }
 
     /**
      * Method to get if is lightning theme.
      * @return Boolean true is lightning theme.
      */
-    isLightning() {
+    static isLightning() {
         return commonActions.isThemeLightning();
     }
 
     /**
      * Method to switch to Lightning Theme.
      */
-    validateToSwitch() {
+    static validateToSwitch() {
         if (!this.isLightning()) {
-            commonActions.clickWebElement(this.switchThemeToLight);
+            commonActions.click('a[class="switch-to-lightning"]');
             commonActions.waitToLightningBear();
         }
     }
@@ -31,11 +26,11 @@ class TopSideBarLightning {
     /**
      * Method to go to Section.
      */
-    goToSection(section) {
+    static goToSection(section) {
         this.validateToSwitch();
         sectionPage.clickOnPlusSectionButton();
         sectionPage.clickOnSectionButton(section);
     }
 }
 
-module.exports = new TopSideBarLightning();
+module.exports = TopSideBarLightning;

@@ -1,5 +1,6 @@
 'use strict';
-let AccountBase = require('./accountBaseForm.page');
+
+const AccountBase = require('./accountBaseForm.po');
 
 class AccountLightningForm extends AccountBase {
     /**

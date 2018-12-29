@@ -1,6 +1,7 @@
 'use strict';
-let commonActions = require('../../core/ui/commonActions');
-let Form = require('../common/form.page');
+
+const commonActions = require('../../core/ui/commonActions');
+const Form = require('../common/form.po');
 
 class AccountBaseForm extends Form {
     /**
@@ -30,7 +31,6 @@ class AccountBaseForm extends Form {
             fillAccountInformation[key].call();
         });
         this.clickOnSaveButton();
-
     }
 
     /**
@@ -39,7 +39,7 @@ class AccountBaseForm extends Form {
      * @param accountText value to set.
      */
     setAccountInput(elementCss, accountText) {
-        commonActions.setInputTextField(elementCss, accountText);
+        commonActions.setValue(elementCss, accountText);
     }
 
     /**

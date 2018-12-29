@@ -1,10 +1,11 @@
 'use strict';
-let login = require('../../pages/common/login.page');
-let topSideBar = require(`../../pages/common/topsidebar.${theme}.page`);
-let content = require(`../../pages/common/content.${theme}.page`);
-let form = require(`../../pages/contacts/contactsForm.${theme}.page`);
 
-describe('Acceptance Test to Modify a Contact', function () {
+const login = require('../../pages/common/login.po');
+const topSideBar = require(`../../pages/common/topsidebar.${theme}.po`);
+const content = require(`../../pages/common/content.${theme}.po`);
+const form = require(`../../pages/contacts/contactsForm.${theme}.po`);
+
+describe('Acceptance Test to Modify a Contact', () => {
 
     let contactModifiedData = {
         lastName: 'Grillo',
@@ -20,7 +21,7 @@ describe('Acceptance Test to Modify a Contact', function () {
         lastName: 'TheContact'
     };
 
-    beforeEach(function () {
+    beforeEach(() => {
         login.login(loginApplication.username, loginApplication.password);
         topSideBar.goToSection('Contacts');
         content.clickOnNewButton();
@@ -28,13 +29,13 @@ describe('Acceptance Test to Modify a Contact', function () {
         expect(content.isNameOnContent(contactWithRequiredField.lastName), 'Contact Name is not equal on Content Page').to.be.true;
     });
 
-    afterEach(function () {
+    afterEach(() => {
         topSideBar.goToSection('Contacts');
         content.selectElementAndDeleteThis(contactModifiedData.lastName);
 
     });
 
-    it('Should allow to update/modify new contact with required fields', function () {
+    it('Should allow to update/modify new contact with required fields', () => {
         topSideBar.goToSection('Contacts');
         content.selectElementAndEditThis(contactWithRequiredField.lastName);
         form.fillContactFields(contactModifiedData);
