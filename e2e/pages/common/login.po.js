@@ -1,23 +1,16 @@
 'use strict';
-let commonActions = require('../../core/ui/commonActions.js');
+
+const commonActions = require('../../core/ui/commonActions');
 
 /**
  * Page Object to login on SalesForce.
  */
-class LoginPage {
+class Login {
 
     /**
      * Constructor initializing all WebElements.
      */
     constructor() {
-        browser.addCommand('waitAndClick', function () {
-            return browser
-                .waitForVisible(arguments[0])
-                .then(() => {
-                    return browser.click.apply(this, arguments);
-                });
-        });
-
         this.loginUserName = '#username';
         this.loginPassword = '#password';
         this.loginSubmit = '#Login';
@@ -28,8 +21,7 @@ class LoginPage {
      * @param userName Value Provided.
      */
     setUsername(userName) {
-        commonActions.setInputTextField(this.loginUserName, userName);
-
+        commonActions.setValue(this.loginUserName, userName);
     }
 
     /**
@@ -37,16 +29,14 @@ class LoginPage {
      * @param password Value Provided.
      */
     setPassword(password) {
-        commonActions.setInputTextField(this.loginPassword, password);
-
+        commonActions.setValue(this.loginPassword, password);
     }
 
     /**
      * Method to click on login button.
      */
-    submit() {
-        commonActions.clickWebElement(this.loginSubmit);
-
+    clickLoginButton() {
+        commonActions.click(this.loginSubmit);
     }
 
     openLoginPage() {
@@ -58,13 +48,14 @@ class LoginPage {
      * @param userName Value Provided.
      * @param password Value Provided.
      */
-    login(userName, password) {
-        this.openLoginPage();
-        this.setUsername(userName);
-        this.setPassword(password);
-        this.submit();
+    static login(userName, password) {
+        let loginPage = new Login();
+        loginPage.openLoginPage();
+        loginPage.setUsername(userName);
+        loginPage.setPassword(password);
+        loginPage.clickLoginButton();
     }
 
 }
 
-module.exports = new LoginPage();
+module.exports = Login;

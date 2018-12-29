@@ -1,16 +1,25 @@
+global.expect = require('chai').expect;
 const config = require('./config.json');
 global.theme = config.theme.toString().toLowerCase();
-global.expect = require('chai').expect;
 global.loginApplication = {
     username: config.username,
     password: config.password
 };
 exports.config = {
     //
+    // ====================
+    // Runner Configuration
+    // ====================
+    //
+    // WebdriverIO allows it to run your tests in arbitrary locations (e.g. locally or
+    // on a remote machine).
+    runner: 'local',
+
+    //
     // ==================
     // Specify Test Files
     // ==================
-    // Define which specs specs should run. The pattern is relative to the directory
+    // Define which test specs should run. The pattern is relative to the directory
     // from which `wdio` was called. Notice that, if you are calling `wdio` from an
     // NPM script (see https://docs.npmjs.com/cli/run-script) then the current working
     // directory is where your package.json resides, so `wdio` will be called from there.
@@ -27,7 +36,7 @@ exports.config = {
     // Capabilities
     // ============
     // Define your capabilities here. WebdriverIO can run multiple capabilities at the same
-    // time. Depending on the number of capabilities, WebdriverIO launches several specs
+    // time. Depending on the number of capabilities, WebdriverIO launches several test
     // sessions. Within your capabilities you can overwrite the spec and exclude options in
     // order to group specific specs to a specific capability.
     //
@@ -36,9 +45,9 @@ exports.config = {
     // set maxInstances to 1; wdio will spawn 3 processes. Therefore, if you have 10 spec
     // files and you set maxInstances to 10, all spec files will get tested at the same time
     // and 30 processes will get spawned. The property handles how many capabilities
-    // from the same specs should run tests.
+    // from the same test should run tests.
     //
-    maxInstances: 2,
+    maxInstances: 10,
     //
     // If you have trouble getting all important capabilities together, check out the
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
@@ -52,7 +61,6 @@ exports.config = {
         //
         browserName: 'chrome'
     }],
-
     //
     // ===================
     // Test Configurations
@@ -64,21 +72,15 @@ exports.config = {
     // e.g. using promises you can set the sync option to false.
     sync: true,
     //
-    // Level of logging verbosity: silent | verbose | command | data | result | error
-    logLevel: 'silent',
-    //
-    // Enables colors for log output.
-    coloredLogs: true,
+    // Level of logging verbosity: trace | debug | info | warn | error
+    logLevel: 'error',
     //
     // Warns when a deprecated command is used
-    deprecationWarnings: false,
+    deprecationWarnings: true,
     //
     // If you only want to run your tests until a specific amount of tests have failed use
     // bail (default is 0 - don't bail, run all tests).
     bail: 0,
-    //
-    // Saves a screenshot to a given path if a command fails.
-    screenshotPath: './errorShots/',
     //
     // Set a base URL in order to shorten url command calls. If your `url` parameter starts
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
@@ -87,7 +89,7 @@ exports.config = {
     baseUrl: 'https://login.salesforce.com',
     //
     // Default timeout for all waitFor* commands.
-    waitforTimeout: 15000,
+    waitforTimeout: 10000,
     //
     // Default timeout in milliseconds for request
     // if Selenium Grid doesn't send response
@@ -96,32 +98,15 @@ exports.config = {
     // Default request retries count
     connectionRetryCount: 3,
     //
-    // Initialize the browser instance with a WebdriverIO plugin. The object should have the
-    // plugin name as key and the desired plugin options as properties. Make sure you have
-    // the plugin installed before running any tests. The following plugins are currently
-    // available:
-    // WebdriverCSS: https://github.com/webdriverio/webdrivercss
-    // WebdriverRTC: https://github.com/webdriverio/webdriverrtc
-    // Browserevent: https://github.com/webdriverio/browserevent
-    // plugins: {
-    //     webdrivercss: {
-    //         screenshotRoot: 'my-shots',
-    //         failedComparisonsRoot: 'diffs',
-    //         misMatchTolerance: 0.05,
-    //         screenWidth: [320,480,640,1024]
-    //     },
-    //     webdriverrtc: {},
-    //     browserevent: {}
-    // },
-    //
     // Test runner services
     // Services take over a specific job you don't want to take care of. They enhance
-    // your specs setup with almost no effort. Unlike plugins, they don't add new
-    // commands. Instead, they hook themselves up into the specs process.
+    // your test setup with almost no effort. Unlike plugins, they don't add new
+    // commands. Instead, they hook themselves up into the test process.
     services: ['selenium-standalone'],
+    //
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
-    // see also: http://webdriver.io/guide/testrunner/frameworks.html
+    // see also: https://webdriver.io/docs/frameworks.html
     //
     // Make sure you have the wdio adapter package for the specific framework installed
     // before running any tests.
@@ -129,8 +114,9 @@ exports.config = {
     //
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
-    // see also: http://webdriver.io/guide/reporters/dot.html
-    reporters: ['spec'],
+    // see also: https://webdriver.io/docs/dot-reporter.html
+    reporters: ['spec','allure'],
+
     //
     // Options to be passed to Mocha.
     // See the full list at http://mochajs.org/
@@ -138,20 +124,11 @@ exports.config = {
         ui: 'bdd',
         timeout: 99999999
     },
-    // //==========
-    // // allure
-    // //==========
-    // reporters: ['spec', 'allure'],
-    // reporterOptions: {
-    //     allure: {
-    //         outputDir: 'allure-results'
-    //     }
-    // },
     //
     // =====
     // Hooks
     // =====
-    // WebdriverIO provides several hooks you can use to interfere with the specs process in order to enhance
+    // WebdriverIO provides several hooks you can use to interfere with the test process in order to enhance
     // it and to build services around it. You can either apply a single function or an array of
     // methods to it. If one of them returns with a promise, WebdriverIO will wait until that promise got
     // resolved to continue.
@@ -160,11 +137,10 @@ exports.config = {
      * @param {Object} config wdio configuration object
      * @param {Array.<Object>} capabilities list of capabilities details
      */
-    onPrepare: function () {
-        //  global.theme = require('./config.json').theme.toString().toLowerCase();
-    }
+    // onPrepare: function (config, capabilities) {
+    // },
     /**
-     * Gets executed just before initialising the webdriver session and specs framework. It allows you
+     * Gets executed just before initialising the webdriver session and test framework. It allows you
      * to manipulate configurations depending on the capability or spec.
      * @param {Object} config wdio configuration object
      * @param {Array.<Object>} capabilities list of capabilities details
@@ -173,13 +149,15 @@ exports.config = {
     // beforeSession: function (config, capabilities, specs) {
     // },
     /**
-     * Gets executed before specs execution begins. At this point you can access to all global
+     * Gets executed before test execution begins. At this point you can access to all global
      * variables like `browser`. It is the perfect place to define custom commands.
      * @param {Array.<Object>} capabilities list of capabilities details
      * @param {Array.<String>} specs List of spec file paths that are to be run
      */
     // before: function (capabilities, specs) {
-    // },
+    before: function () {
+        browser.maximizeWindow();
+    },
     /**
      * Runs before a WebdriverIO command gets executed.
      * @param {String} commandName hook command name
@@ -195,10 +173,10 @@ exports.config = {
     // beforeSuite: function (suite) {
     // },
     /**
-     * Function to be executed before a specs (in Mocha/Jasmine) or a step (in Cucumber) starts.
-     * @param {Object} specs specs details
+     * Function to be executed before a test (in Mocha/Jasmine) or a step (in Cucumber) starts.
+     * @param {Object} test test details
      */
-    // beforeTest: function (specs) {
+    // beforeTest: function (test) {
     // },
     /**
      * Hook that gets executed _before_ a hook within the suite starts (e.g. runs before calling
@@ -207,16 +185,16 @@ exports.config = {
     // beforeHook: function () {
     // },
     /**
-     * Hook that gets executed _after_ a hook within the suite ends (e.g. runs after calling
+     * Hook that gets executed _after_ a hook within the suite starts (e.g. runs after calling
      * afterEach in Mocha)
      */
     // afterHook: function () {
     // },
     /**
-     * Function to be executed after a specs (in Mocha/Jasmine) or a step (in Cucumber) ends.
-     * @param {Object} specs specs details
+     * Function to be executed after a test (in Mocha/Jasmine) or a step (in Cucumber) starts.
+     * @param {Object} test test details
      */
-    // afterTest: function (specs) {
+    // afterTest: function (test) {
     // },
     /**
      * Hook that gets executed after the suite has ended
@@ -236,8 +214,8 @@ exports.config = {
     // },
     /**
      * Gets executed after all tests are done. You still have access to all global variables from
-     * the specs.
-     * @param {Number} result 0 - specs pass, 1 - specs fail
+     * the test.
+     * @param {Number} result 0 - test pass, 1 - test fail
      * @param {Array.<Object>} capabilities list of capabilities details
      * @param {Array.<String>} specs List of spec file paths that ran
      */
@@ -256,7 +234,8 @@ exports.config = {
      * @param {Object} exitCode 0 - success, 1 - fail
      * @param {Object} config wdio configuration object
      * @param {Array.<Object>} capabilities list of capabilities details
+     * @param {<Object>} results object containing test results
      */
-    // onComplete: function(exitCode, config, capabilities) {
+    // onComplete: function(exitCode, config, capabilities, results) {
     // }
 };

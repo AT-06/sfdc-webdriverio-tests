@@ -1,5 +1,6 @@
 'use strict';
-let ContactsBaseForm = require('./contactsBaseForm.page');
+
+const ContactsBaseForm = require('./contactsBaseForm.po');
 
 class ContactsLightForm extends ContactsBaseForm {
     /**

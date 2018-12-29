@@ -1,10 +1,11 @@
 'use strict';
-let login = require('../../pages/common/login.page');
-let topSideBar = require(`../../pages/common/topsidebar.${theme}.page`);
-let content = require(`../../pages/common/content.${theme}.page`);
-let form = require(`../../pages/contacts/contactsForm.${theme}.page`);
 
-describe('Acceptance Test to create new Contact', function () {
+const login = require('../../pages/common/login.po');
+const topSideBar = require(`../../pages/common/topsidebar.${theme}.po`);
+const content = require(`../../pages/common/content.${theme}.po`);
+const form = require(`../../pages/contacts/contactsForm.${theme}.po`);
+
+describe('Acceptance Test to create new Contact', () => {
     let contactData = {
         lastName: 'Grillo',
         title: 'Ing',
@@ -15,22 +16,21 @@ describe('Acceptance Test to create new Contact', function () {
         email: 'grillo@gmail.com'
     };
 
-    beforeEach(function () {
+    beforeEach(() => {
         login.login(loginApplication.username, loginApplication.password);
     });
 
-    afterEach(function () {
+    afterEach(() => {
         topSideBar.goToSection('Contacts');
         content.selectElementAndDeleteThis(contactData.lastName);
 
     });
 
-    it('Should allow to add new contact with all information', function () {
+    it('Should allow to add new contact with all information', () => {
         topSideBar.goToSection('Contacts');
         content.clickOnNewButton();
         form.fillContactFields(contactData);
         expect(content.isNameOnContent(contactData.lastName), 'Contact Name is not equal on Content Page').to.be.true;
-
     });
 
 });

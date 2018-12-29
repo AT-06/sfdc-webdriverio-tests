@@ -1,5 +1,6 @@
 'use strict';
-let commonActions = require('../../core/ui/commonActions.js');
+
+const commonActions = require('../../core/ui/commonActions');
 
 class ContentBase {
     /**
@@ -14,7 +15,7 @@ class ContentBase {
      * @param element css locator.
      */
     clickLastElementOnTheList(element) {
-        commonActions.clickWebElement(this.getLastElementOnTheList(element));
+        commonActions.click(this.getLastElementOnTheList(element));
     }
     /**
      * Method to get element on list.

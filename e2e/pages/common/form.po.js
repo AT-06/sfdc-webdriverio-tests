@@ -1,5 +1,6 @@
 'use strict';
-let commonActions = require('../../core/ui/commonActions.js');
+
+const commonActions = require('../../core/ui/commonActions');
 
 /**
  * Page Object of Form.
@@ -17,7 +18,7 @@ class Form {
      * Method to click on save button.
      */
     clickOnSaveButton() {
-        commonActions.clickWebElement(this.saveButton);
+        commonActions.click(this.saveButton);
     }
 }
 

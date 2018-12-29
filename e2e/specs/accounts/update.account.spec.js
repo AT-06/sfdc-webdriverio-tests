@@ -1,10 +1,11 @@
 'use strict';
-let loginPage = require('../../pages/common/login.page');
-let topSideBar = require(`../../pages/common/topsidebar.${theme}.page`);
-let content = require(`../../pages/common/content.${theme}.page`);
-let form = require(`../../pages/accounts/accountForm.${theme}.page`);
 
-describe('Acceptance Test to Modify an Account', function () {
+const login = require('../../pages/common/login.po');
+const topSideBar = require(`../../pages/common/topsidebar.${theme}.po`);
+const content = require(`../../pages/common/content.${theme}.po`);
+const form = require(`../../pages/accounts/accountForm.${theme}.po`);
+
+describe('Acceptance Test to Modify an Account', () => {
 
     let accountModified = {
         name: 'Account Sample',
@@ -20,21 +21,20 @@ describe('Acceptance Test to Modify an Account', function () {
         name: 'Account Required'
     };
 
-    beforeEach(function () {
-        loginPage.login(loginApplication.username, loginApplication.password);
+    beforeEach(() => {
+        login.login(loginApplication.username, loginApplication.password);
         topSideBar.goToSection('Accounts');
         content.clickOnNewButton();
         form.fillAccountFields(accountToModify);
         expect(content.isNameOnContent(accountToModify.name), 'Account Name is not equal on Content Page').to.be.true;
     });
 
-    afterEach(function () {
+    afterEach(() => {
         topSideBar.goToSection('Accounts');
         content.selectElementAndDeleteThis(accountModified.name);
-
     });
 
-    it('Should allow to update/modify new account with required fields', function () {
+    it('Should allow to update/modify new account with required fields', () => {
         topSideBar.goToSection('Accounts');
         content.selectElementAndEditThis(accountToModify.name);
         form.fillAccountFields(accountModified);

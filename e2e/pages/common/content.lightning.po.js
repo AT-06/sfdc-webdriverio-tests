@@ -1,6 +1,7 @@
 'use strict';
-let commonActions = require('../../core/ui/commonActions.js');
-let ContentBase = require('./contentBase.page');
+
+const commonActions = require('../../core/ui/commonActions');
+const ContentBase = require('./contentBase.po');
 
 class ContentLightning extends ContentBase {
     /**
@@ -20,35 +21,35 @@ class ContentLightning extends ContentBase {
      * Method to click on New button.
      */
     clickOnNewButton() {
-        commonActions.clickWebElement(this.newButton);
+        commonActions.click(this.newButton);
     }
 
     /**
      * Method to click on Edit button.
      */
     clickOnEditButton() {
-        commonActions.clickWebElement(this.editButton);
+        commonActions.click(this.editButton);
     }
 
     /**
      * Method to click on Delete button.
      */
     clickOnDeleteButton() {
-        commonActions.clickWebElement(this.deleteButton);
+        commonActions.click(this.deleteButton);
     }
 
     /**
      * Method to click on Delete button.
      */
     clickOnDropDownButton() {
-        commonActions.clickWebElement(this.dropDownMenu);
+        commonActions.click(this.dropDownMenu);
     }
 
     /**
      * Method to click to confirm Delete button.
      */
     clickOnConfirmDelete() {
-        commonActions.clickWebElement(this.deleteConfirmButton);
+        commonActions.click(this.deleteConfirmButton);
     }
 
     /**
@@ -96,7 +97,7 @@ class ContentLightning extends ContentBase {
      * @return boolean is present on element
      */
     existOnList(nameToVerify) {
-        return commonActions.elementExist(this.getLastElementOnTheList(nameToVerify));
+        return commonActions.isExisting(this.getLastElementOnTheList(nameToVerify));
     }
 
 }

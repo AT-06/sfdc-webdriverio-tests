@@ -1,5 +1,6 @@
 'use strict';
-const timeToWait = 30000;
+
+const EXPLICIT_TIMEOUT = 30000;
 
 /**
  * CommonActions class with CommonActions Methods.
@@ -7,52 +8,22 @@ const timeToWait = 30000;
 class CommonActions {
 
     /**
-     * Method to wait a element.
-     * @param elementCSS WebElement locator.
-     */
-    static waitElement(elementCSS) {
-        browser.waitUntil(function () {
-            return browser.isVisible(elementCSS)
-                && browser.isExisting(elementCSS);
-        }, timeToWait);
-    }
-
-    /**
      * Method to click on element.
      * @param elementCSS WebElement locator.
      */
-    static clickWebElement(elementCSS) {
-        this.moveToComponent(elementCSS);
-        browser.click(elementCSS);
-    }
-
-    /**
-     * Method to return a element.
-     * @param elementCSS WebElement locator.
-     * @returns WebElement.
-     */
-    static getElement(elementCSS) {
-        this.waitElement(elementCSS);
-        return browser.element(elementCSS);
+    static click(elementCSS) {
+        browser.$(elementCSS).waitForDisplayed(EXPLICIT_TIMEOUT);
+        browser.$(elementCSS).click();
     }
 
     /**
      * Method to set WebElement value.
      * @param elementCSS WebElement locator.
+     * @param value text.
      */
-    static setInputTextField(elementCSS, value) {
-        this.waitElement(elementCSS);
-        this.moveToComponent(elementCSS);
-        browser.element(elementCSS).setValue(value);
-    }
-
-    /**
-     * Method to move focus to WebElement.
-     * @param elementCss WebElement locator.
-     */
-    static moveToComponent(elementCss) {
-        this.waitElement(elementCss);
-        browser.moveToObject(elementCss);
+    static setValue(elementCSS, value) {
+        browser.$(elementCSS).waitForDisplayed(EXPLICIT_TIMEOUT);
+        browser.$(elementCSS).setValue(value);
     }
 
     /**
@@ -60,17 +31,17 @@ class CommonActions {
      * @param elementToSelect select text on comboBox.
      */
     static selectOnComboBox(elementCss, elementToSelect) {
-        this.clickWebElement(elementCss);
+        this.click(elementCss);
         let css = theme === 'classic' ? `option[value="${elementToSelect}"]` : `a[title="${elementToSelect}"]`;
-        this.clickWebElement(css);
+        this.click(css);
     }
 
     /**
      * Confirm delete action on alert at Classic Theme.
      */
     static confirmAlert() {
-        if (browser.alertText()) {
-            browser.alertAccept();
+        if (browser.getAlertText()) {
+            browser.acceptAlert();
         }
     }
 
@@ -79,14 +50,15 @@ class CommonActions {
      * @param textToVerify text to verify.
      */
     static isPresentOnElement(elementCss, textToVerify) {
-        return this.getElement(elementCss).getText().toString() === textToVerify;
+        browser.$(elementCss).waitForDisplayed(EXPLICIT_TIMEOUT);
+        return browser.$(elementCss).getText().toString() === textToVerify;
     }
 
     /**
      * Method to wait spam bear after login on Lightning theme.
      */
     static waitToLightningBear() {
-        browser.waitForExist('div[class="auraLoadingBox oneLoadingBox loadingHide"]', timeToWait);
+        browser.$('div[class="auraLoadingBox oneLoadingBox loadingHide"]').waitForExist(EXPLICIT_TIMEOUT);
     }
 
     /**
@@ -101,8 +73,8 @@ class CommonActions {
      * Method to verify is element visible.
      * @return Boolean true if exits.
      */
-    static elementExist(element) {
-        return browser.isExisting(element);
+    static isExisting(element) {
+        return browser.$(element).isExisting();
     }
 
     /**
@@ -110,8 +82,8 @@ class CommonActions {
      * @param closeButton close button on popup message at Classic Theme.
      */
     static closePopMessage() {
-        if (browser.isVisible('#lexNoThanks')) {
-            this.clickWebElement('#tryLexDialogX');
+        if (this.isExisting('#lexNoThanks')) {
+            this.click('#tryLexDialogX');
         }
     }
 

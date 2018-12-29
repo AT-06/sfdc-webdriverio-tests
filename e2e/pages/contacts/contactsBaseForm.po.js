@@ -1,5 +1,7 @@
-let commonActions = require('../../core/ui/commonActions');
-let Form = require('../common/form.page');
+'use strict';
+
+const commonActions = require('../../core/ui/commonActions');
+const Form = require('../common/form.po');
 
 class ContactsBaseForm extends Form {
     /**
@@ -37,7 +39,7 @@ class ContactsBaseForm extends Form {
      * @param contactText value to set.
      */
     setContactInput(elementCss, contactText) {
-        commonActions.setInputTextField(elementCss, contactText);
+        commonActions.setValue(elementCss, contactText);
     }
 
     /**
