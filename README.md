@@ -20,22 +20,14 @@ The following main features are implemented in this framework:
 The tools needed to execute the tests are the following:
     
     - node js version 8.11.3
-    - selenium-standalone
-    - WebStorm IDE
     - Download the project:https://github.com/AT-08/sfdc-wdio-tests
 
 
 - **Executing tests**
 
 In order to execute the tests is necessary these configurations:
-
-- Open the command prompt and write the next command:
-        
-        selenium-standalone start
-        
-  NOTE:Don't stop the service
     
- - Open a new command prompt in the project's root directory 
+ - Open a the command prompt in the project's root directory 
  and download all project's dependencies
   
         npm install
