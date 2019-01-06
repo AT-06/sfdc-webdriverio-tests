@@ -32,19 +32,8 @@ In order to execute the tests is necessary these configurations:
   
         npm install
   
- - Open the **config.json**  and set the required parameters:
+ - Open the **environment.json**  and set the required parameters:
     
-          "username": "SaleForce username"
-          "password": "SaleForce password"
-          "theme": "classic or lightning"
-        
-          "sauceUserName": "SauceLabs username"
-          "sauceKEY": "SauceLabs token"
-          "browserName": "SauceLabs browser"
-          "platform": "SauceLabs OS name"
-          "version": "SauceLabs browser version
-   
-
 - To execute the tests open a command prompt 
 where dependencies where downloaded  and write:
     

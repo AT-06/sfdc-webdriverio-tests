@@ -10,16 +10,17 @@ let environment = require('./environment.json');
 // should work too though). These services define specific user and key (or access key)
 // values you need to put in here in order to connect to these services.
 //
-defaults.user = environment.saucelabs.user;
-defaults.key = environment.saucelabs.key;
+defaults.user = environment.testingbot.user;
+defaults.key = environment.testingbot.key;
 
-defaults.services = ['sauce'];
+defaults.services = ['testingbot'];
 
-// https://wiki.saucelabs.com/display/DOCS/Platform+Configurator#/
+// https://testingbot.com/support/other/test-options
+// https://testingbot.com/support/getting-started/browsers.html
 defaults.capabilities = [{
-    browserName: environment.saucelabs.browserName,
-    platform: environment.saucelabs.platform,
-    version: environment.saucelabs.version
+    browserName: environment.testingbot.browserName,
+    platform: environment.testingbot.platform,
+    version: environment.testingbot.version
 }];
 
 exports.config = defaults;

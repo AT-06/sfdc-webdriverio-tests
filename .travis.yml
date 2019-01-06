@@ -1,20 +1,20 @@
 sudo: required
-
 language: node_js
-
 node_js:
   - 8
-
 addons:
+  chrome: stable
   sonarcloud:
-    organization: "at-08"
+    organization: at-08
     token:
-      secure: $SONAR_TOKEN
-
+      secure: "$SONAR_TOKEN"
+before_install:
+  - openssl aes-256-cbc -K $encrypted_b9f1d6d38670_key -iv $encrypted_b9f1d6d38670_iv
+    -in environment.json.enc -out environment.json -d
+  - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
 script:
   - npm install
   - sonar-scanner
   - npm run lint
-
 notifications:
   email: true
