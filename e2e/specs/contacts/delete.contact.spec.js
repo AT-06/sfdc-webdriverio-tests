@@ -1,18 +1,20 @@
 'use strict';
 
+const environment = require('../../../environment.json');
+
 const login = require('../../pages/common/login.po');
 const topSideBar = require(`../../pages/common/topsidebar.${theme}.po`);
 const content = require(`../../pages/common/content.${theme}.po`);
 const form = require(`../../pages/contacts/contactsForm.${theme}.po`);
 
-describe('Acceptance Test to Delete a Contact', () => {
+describe.skip('Acceptance Test to Delete a Contact', () => {
 
     let contactToDelete = {
         lastName: 'Contact to Delete'
     };
 
     beforeEach(() => {
-        login.login(loginApplication.username, loginApplication.password);
+        login.login(environment.credentials.admin.username, environment.credentials.admin.password);
         topSideBar.goToSection('Contacts');
         content.clickOnNewButton();
         form.fillContactFields(contactToDelete);

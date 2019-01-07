@@ -1,5 +1,7 @@
 'use strict';
 
+const environment = require('../../../environment.json');
+
 const login = require('../../pages/common/login.po');
 const topSideBar = require(`../../pages/common/topsidebar.${theme}.po`);
 const content = require(`../../pages/common/content.${theme}.po`);
@@ -17,7 +19,7 @@ describe('Acceptance Test to create new Contact', () => {
     };
 
     beforeEach(() => {
-        login.login(loginApplication.username, loginApplication.password);
+        login.login(environment.credentials.admin.username, environment.credentials.admin.password);
     });
 
     afterEach(() => {
@@ -26,7 +28,7 @@ describe('Acceptance Test to create new Contact', () => {
 
     });
 
-    it('Should allow to add new contact with all information', () => {
+    it('#BVT Should allow to add new contact with all information', () => {
         topSideBar.goToSection('Contacts');
         content.clickOnNewButton();
         form.fillContactFields(contactData);

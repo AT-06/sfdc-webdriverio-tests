@@ -1,10 +1,6 @@
 global.expect = require('chai').expect;
-const config = require('./config.json');
-global.theme = config.theme.toString().toLowerCase();
-global.loginApplication = {
-    username: config.username,
-    password: config.password
-};
+const environment = require('./environment.json');
+global.theme = environment.theme.toString().toLowerCase();
 exports.config = {
     //
     // ====================
@@ -55,11 +51,11 @@ exports.config = {
     //
     capabilities: [{
         // maxInstances can get overwritten per capability. So if you have an in-house Selenium
-        // grid with only 5 firefox instances available you can make sure that not more than
+        // grid with only 5 firefox/chrome instances available you can make sure that not more than
         // 5 instances get started at a time.
-        maxInstances: 1,
+        maxInstances: 5,
         //
-        browserName: 'chrome'
+        browserName: environment.local.browser
     }],
     //
     // ===================
@@ -122,7 +118,8 @@ exports.config = {
     // See the full list at http://mochajs.org/
     mochaOpts: {
         ui: 'bdd',
-        timeout: 99999999
+        timeout: 99999999,
+        grep: environment.tags
     },
     //
     // =====

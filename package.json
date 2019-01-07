@@ -5,28 +5,27 @@
   "main": "index.js",
   "scripts": {
     "test": "wdio",
-    "firefox": "wdio wdio.firefox.conf.js",
-    "chrome": "wdio wdio.conf.js",
-    "mobile": "wdio wdio.mobile.conf.js",
     "saucelabs": "wdio wdio.saucelabs.conf.js",
-    "dockerFirefox": "wdio wdio.dockerFirefox.conf.js",
-    "dockerChrome": "wdio wdio.dockerChrome.conf.js",
+    "browserstack": "wdio wdio.browserstack.conf.js",
+    "testingbot": "wdio wdio.testingbot.conf.js",
+    "travis": "wdio wdio.travis.conf.js",
+    "docker": "wdio wdio.docker.conf.js",
     "lint": "eslint . --cache --fix --format node_modules/eslint-friendly-formatter --ext .js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@wdio/allure-reporter": "^5.1.0",
-    "@wdio/cli": "^5.1.0",
-    "@wdio/local-runner": "^5.1.0",
-    "@wdio/mocha-framework": "^5.1.0",
-    "@wdio/selenium-standalone-service": "^5.1.0",
-    "@wdio/spec-reporter": "^5.1.0",
-    "@wdio/sync": "^5.1.0",
+    "@wdio/allure-reporter": "^5.2.2",
+    "@wdio/cli": "^5.2.2",
+    "@wdio/local-runner": "^5.2.2",
+    "@wdio/mocha-framework": "^5.2.2",
+    "@wdio/selenium-standalone-service": "^5.2.2",
+    "@wdio/spec-reporter": "^5.2.2",
+    "@wdio/sync": "^5.2.2",
     "chai": "^4.2.0",
     "wdio-eslint-service": "0.0.3",
     "eslint-plugin-webdriverio": "^1.0.1",
-    "webdriverio": "^5.1.0"
+    "webdriverio": "^5.2.2"
   }
 }

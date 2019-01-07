@@ -1,5 +1,7 @@
 'use strict';
 
+const environment = require('../../../environment.json');
+
 const login = require('../../pages/common/login.po');
 const topSideBar = require(`../../pages/common/topsidebar.${theme}.po`);
 const content = require(`../../pages/common/content.${theme}.po`);
@@ -22,7 +24,7 @@ describe('Acceptance Test to Modify an Account', () => {
     };
 
     beforeEach(() => {
-        login.login(loginApplication.username, loginApplication.password);
+        login.login(environment.credentials.admin.username, environment.credentials.admin.password);
         topSideBar.goToSection('Accounts');
         content.clickOnNewButton();
         form.fillAccountFields(accountToModify);
