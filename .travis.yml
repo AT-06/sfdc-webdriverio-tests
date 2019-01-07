@@ -16,5 +16,6 @@ script:
   - npm install
   - sonar-scanner
   - npm run lint
+  - npm run travis
 notifications:
   email: true
