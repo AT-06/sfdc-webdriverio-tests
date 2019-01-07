@@ -9,7 +9,7 @@ addons:
     token:
       secure: "$SONAR_TOKEN"
 before_install:
-  - openssl aes-256-cbc -K $encrypted_b9f1d6d38670_key -iv $encrypted_b9f1d6d38670_iv
+  - openssl aes-256-cbc -K $encrypted_4e0877d9a5af_key -iv $encrypted_4e0877d9a5af_iv
     -in environment.json.enc -out environment.json -d
   - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
 script:
